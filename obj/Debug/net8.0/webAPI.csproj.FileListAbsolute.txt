@@ -1,0 +1,7 @@
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\obj\Debug\net8.0\webAPI.csproj.AssemblyReference.cache
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\obj\Debug\net8.0\webAPI.GeneratedMSBuildEditorConfig.editorconfig
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\obj\Debug\net8.0\webAPI.AssemblyInfoInputs.cache
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\obj\Debug\net8.0\webAPI.AssemblyInfo.cs
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\obj\Debug\net8.0\webAPI.csproj.CoreCompileInputs.cache
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\obj\Debug\net8.0\webAPI.MvcApplicationPartsAssemblyInfo.cs
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\obj\Debug\net8.0\webAPI.MvcApplicationPartsAssemblyInfo.cache
