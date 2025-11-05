@@ -32,9 +32,10 @@ namespace SongHomeWork.Controllers{
         }
 
         [HttpPost] 
-        public void Create(Song song)
+        public ActionResult Create(Song song)
         {
             SongService.Create(song);
+            return NoContent();
 
         }
 
