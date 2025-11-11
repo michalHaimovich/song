@@ -5,7 +5,7 @@ using SongNameSpace.Models;
 
 namespace SongHomeWork.service{
 
-     public static class SongService {
+      static class SongService {
         
         static List<Song> ls=new List<Song>{
                 new Song(){Id=1,name="ytrtyrft",composer="fds"},
@@ -62,9 +62,7 @@ namespace SongHomeWork.service{
              else{ 
                 ls.RemoveAt(index);
                 return true;
-                }
-           
-
+            }
         }
 
      }
