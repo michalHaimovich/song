@@ -3,28 +3,30 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
  using SongNameSpace.Models;
 using SongHomeWork.service;
+using WEBAPI.interfaces;
 
 namespace SongHomeWork.Controllers{
     [ApiController]
     [Route("[controller]")]
      public class SongController : ControllerBase{
+         
+        Isong service;
 
-        public SongController(){
-            
-
+        public SongController(Isong service){
+            this.service=service;
         }
 
          [HttpGet]
         public IEnumerable<Song> Get()
         {
-          return  SongService.Get();
+          return  service.Get();
         }
 
 
         [HttpGet("{id}")]
         public ActionResult<Song> Get(int id)
         {
-            var song=SongService.Get(id);
+            var song=service.Get(id);
             if(song == null)
                 return NotFound();
             return song;
@@ -34,14 +36,14 @@ namespace SongHomeWork.Controllers{
         [HttpPost] 
         public ActionResult Create(Song song)
         {
-            SongService.Create(song);
+            service.Create(song);
             return NoContent();
 
         }
 
         [HttpPut("{id}")]
         public ActionResult update(int id, Song song){
-           int i= SongService.update(id,song);
+           int i= service.update(id,song);
             if(i==0)
              return BadRequest();
             if(i==1)
@@ -51,7 +53,7 @@ namespace SongHomeWork.Controllers{
 
         [HttpDelete("{id}")]
         public ActionResult delete(int id){
-           bool flag= SongService.delete(id);
+           bool flag= service.delete(id);
             if(!flag)
                 return NotFound();
             return NoContent();

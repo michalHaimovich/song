@@ -1,13 +1,16 @@
 using System.Collections.Generic;
-
 using System.Linq;
 using SongNameSpace.Models;
+using WEBAPI.interfaces;
 
 namespace SongHomeWork.service{
 
-      static class SongService {
+      public class SongService : Isong{
         
-        static List<Song> ls=new List<Song>{
+        public List<Song> ls;
+
+        public SongService(){
+           this.ls=new List<Song>{
                 new Song(){Id=1,name="ytrtyrft",composer="fds"},
                 new Song(){Id=2,name="dsasd",composer="fdsrew"},
                 new Song(){Id=3,name="jhyt",composer="sgsd"}, 
@@ -17,21 +20,16 @@ namespace SongHomeWork.service{
                 new Song(){Id=7,name="a ",composer="fds"}
         };
 
-
-
-        static SongService(){
-    
-
         }
 
-        public static IEnumerable<Song> Get()
+        public  List<Song> Get()
         {
             return ls;
         }
 
 
 
-        public static Song Get(int id)
+        public  Song Get(int id)
         {
            
 
@@ -39,13 +37,13 @@ namespace SongHomeWork.service{
         }
 
 
-        public static void Create(Song song)
+        public  void Create(Song song)
         {
             song.Id=ls.Max(m=>m.Id)+1;
             ls.Add(song);
         }
 
-        public static int update(int id, Song song){
+        public  int update(int id, Song song){
             if(id!= song.Id)
                 return 0;
             var index=ls.FindIndex(p=>p.Id==id);
@@ -55,7 +53,7 @@ namespace SongHomeWork.service{
             return 2;
         }
 
-        public static bool delete(int id){
+        public  bool delete(int id){
              var index=ls.FindIndex(p=>p.Id==id);
              if(index==-1)
                 return false;
@@ -65,6 +63,13 @@ namespace SongHomeWork.service{
             }
         }
 
+     }
+
+     public static class SongServiceExtention
+     {
+        public static void addSongService(this IServiceCollection service){
+            service.AddSingleton<Isong, SongService>();
+        }
      }
 
 }
