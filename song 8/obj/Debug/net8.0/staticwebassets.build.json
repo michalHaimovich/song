@@ -1,0 +1,77 @@
+{
+  "Version": 1,
+  "Hash": "oluiTM4yr0EYZVVzXhFOoWjS11V+BwqBs2OIjtF2OrM=",
+  "Source": "songV9",
+  "BasePath": "_content/songV9",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "songV9\\wwwroot",
+      "Source": "songV9",
+      "ContentRoot": "Z:\\יד תשפו\\חיימוביץ מיכל\\webAPI\\songV9\\wwwroot\\",
+      "BasePath": "_content/songV9",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "Z:\\יד תשפו\\חיימוביץ מיכל\\webAPI\\songV9\\wwwroot\\css\\site.css",
+      "SourceId": "songV9",
+      "SourceType": "Discovered",
+      "ContentRoot": "Z:\\יד תשפו\\חיימוביץ מיכל\\webAPI\\songV9\\wwwroot\\",
+      "BasePath": "_content/songV9",
+      "RelativePath": "css/site.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "Z:\\יד תשפו\\חיימוביץ מיכל\\webAPI\\songV9\\wwwroot\\index.html",
+      "SourceId": "songV9",
+      "SourceType": "Discovered",
+      "ContentRoot": "Z:\\יד תשפו\\חיימוביץ מיכל\\webAPI\\songV9\\wwwroot\\",
+      "BasePath": "_content/songV9",
+      "RelativePath": "index.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\index.html"
+    },
+    {
+      "Identity": "Z:\\יד תשפו\\חיימוביץ מיכל\\webAPI\\songV9\\wwwroot\\js\\site.js",
+      "SourceId": "songV9",
+      "SourceType": "Discovered",
+      "ContentRoot": "Z:\\יד תשפו\\חיימוביץ מיכל\\webAPI\\songV9\\wwwroot\\",
+      "BasePath": "_content/songV9",
+      "RelativePath": "js/site.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\site.js"
+    }
+  ]
+}
