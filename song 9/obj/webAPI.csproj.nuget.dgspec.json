@@ -1,38 +1,37 @@
 {
   "format": 1,
   "restore": {
-    "z:\\יד תשפו\\חיימוביץ מיכל\\webAPI\\webAPI.csproj": {}
+    "Z:\\יד תשפו\\חיימוביץ מיכל\\webAPI\\song 9\\webAPI.csproj": {}
   },
   "projects": {
-    "z:\\יד תשפו\\חיימוביץ מיכל\\webAPI\\webAPI.csproj": {
+    "Z:\\יד תשפו\\חיימוביץ מיכל\\webAPI\\song 9\\webAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "z:\\יד תשפו\\חיימוביץ מיכל\\webAPI\\webAPI.csproj",
+        "projectUniqueName": "Z:\\יד תשפו\\חיימוביץ מיכל\\webAPI\\song 9\\webAPI.csproj",
         "projectName": "webAPI",
-        "projectPath": "z:\\יד תשפו\\חיימוביץ מיכל\\webAPI\\webAPI.csproj",
+        "projectPath": "Z:\\יד תשפו\\חיימוביץ מיכל\\webAPI\\song 9\\webAPI.csproj",
         "packagesPath": "C:\\Users\\huser\\.nuget\\packages\\",
-        "outputPath": "z:\\יד תשפו\\חיימוביץ מיכל\\webAPI\\obj\\",
+        "outputPath": "Z:\\יד תשפו\\חיימוביץ מיכל\\webAPI\\song 9\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
           "C:\\Users\\huser\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net8.0"
+          "net9.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net8.0": {
-            "targetAlias": "net8.0",
+          "net9.0": {
+            "targetAlias": "net9.0",
             "projectReferences": {}
           }
         },
@@ -40,11 +39,17 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
+        "net9.0": {
+          "targetAlias": "net9.0",
           "dependencies": {
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
@@ -74,7 +79,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

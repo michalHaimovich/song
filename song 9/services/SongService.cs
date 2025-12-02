@@ -33,7 +33,7 @@ namespace SongHomeWork.service{
         {
            
 
-            return ls.FirstOrDefault(m=>m.Id==id);
+            return ls.FirstOrDefault(m=>m.Id==id)!;
         }
 
 
