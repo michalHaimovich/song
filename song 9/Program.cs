@@ -1,20 +1,25 @@
 using WEBAPI.interfaces;
 using SongHomeWork.service;
 using MyMiddleware;
+using MyIuser.interfaces;
+using MyUserSe.Service;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Logging.ClearProviders();
-builder.Logging.AddConsole(); 
-builder.Logging.SetMinimumLevel(LogLevel.Debug);
+
 
 // Add services to the container.
 builder.Services.addSongService();
+builder.Services.addUserService();
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole(); 
+builder.Logging.SetMinimumLevel(LogLevel.Debug);
 
 
 var app = builder.Build();
