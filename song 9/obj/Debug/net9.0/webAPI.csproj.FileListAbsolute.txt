@@ -67,8 +67,8 @@ Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\rjimsw
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\rjsmrazor.dswa.cache.json
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\staticwebassets.build.json.cache
-Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\81e5gvvwwd-zoxlk5se5i.gz
-Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\h1btcv3pzh-2pnea6h6a2.gz
-Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\ta82edhjdx-vlvdmup9br.gz
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\b3hj2x1gnm-cuqvmxb13f.gz
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\fu6vx1qp9q-59a6hbnubx.gz
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\81e5gvvwwd-zoxlk5se5i.gz
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\h1btcv3pzh-ip3j3kh0z0.gz
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\dcbdl0ednc-c4insr5426.gz
