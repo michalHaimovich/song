@@ -1,5 +1,5 @@
-const uri = '/Song';
-let songs = [];
+const uri = '/User';
+let instruments = [];
 
 function getItems() {
     fetch(uri)
@@ -12,8 +12,9 @@ function addItem() {
     const addNameTextbox = document.getElementById('add-name');
 
     const item = {
-        isGlutenFree: false,
-        name: addNameTextbox.value.trim()
+        Id:1,
+        name: addNameTextbox.value.trim(),
+        age:12
     };
 
     fetch(uri, {
@@ -24,7 +25,6 @@ function addItem() {
             },
             body: JSON.stringify(item)
         })
-        .then(response => response.json())
         .then(() => {
             getItems();
             addNameTextbox.value = '';
@@ -41,11 +41,9 @@ function deleteItem(id) {
 }
 
 function displayEditForm(id) {
-    const item = pizzas.find(item => item.id === id);
-
+    const item = instruments.find(item => item.id === id);
+    document.getElementById('edit-id').value=item.id;
     document.getElementById('edit-name').value = item.name;
-    document.getElementById('edit-id').value = item.id;
-    document.getElementById('edit-isGlutenFree').checked = item.isGlutenFree;
     document.getElementById('editForm').style.display = 'block';
 }
 
@@ -53,8 +51,8 @@ function updateItem() {
     const itemId = document.getElementById('edit-id').value;
     const item = {
         id: parseInt(itemId, 10),
-        isGlutenFree: document.getElementById('edit-isGlutenFree').checked,
-        name: document.getElementById('edit-name').value.trim()
+        name: document.getElementById('edit-name').value.trim(),
+        age:12
     };
 
     fetch(`${uri}/${itemId}`, {
@@ -77,25 +75,25 @@ function closeInput() {
     document.getElementById('editForm').style.display = 'none';
 }
 
-function _displayCount(itemCount) {
-    const name = (itemCount === 1) ? 'pizza' : 'pizza kinds';
+// function _displayCount(itemCount) {
+//     const name = (itemCount === 1) ? 'music' : 'instruments';
 
-    document.getElementById('counter').innerText = `${itemCount} ${name}`;
-}
+//     document.getElementById('counter').innerText = `${itemCount} ${name}`;
+// }
 
 function _displayItems(data) {
-    const tBody = document.getElementById('pizzas');
+    debugger;
+    const tBody = document.getElementById('musics');
     tBody.innerHTML = '';
 
-    _displayCount(data.length);
+  //  _displayCount(data.length);
 
     const button = document.createElement('button');
 
     data.forEach(item => {
 
-        let isGlutenFreeCheckbox = document.createElement('input');
-        let editButton = button.cloneNode(false);
 
+        let editButton = button.cloneNode(false);
         editButton.innerText = 'Edit';
         editButton.setAttribute('onclick', `displayEditForm(${item.id})`);
 
@@ -105,19 +103,16 @@ function _displayItems(data) {
 
         let tr = tBody.insertRow();
 
-        let td1 = tr.insertCell(0);
-        td1.appendChild(isGlutenFreeCheckbox);
-
-        let td2 = tr.insertCell(1);
+        let td2 = tr.insertCell(0);
         let textNode = document.createTextNode(item.name);
         td2.appendChild(textNode);
 
-        let td3 = tr.insertCell(2);
+        let td3 = tr.insertCell(1);
         td3.appendChild(editButton);
 
-        let td4 = tr.insertCell(3);
+        let td4 = tr.insertCell(2);
         td4.appendChild(deleteButton);
     });
 
-    pizzas = data;
+    instruments = data;
 }

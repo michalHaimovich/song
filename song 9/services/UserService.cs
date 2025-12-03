@@ -11,8 +11,8 @@ namespace MyUserSe.Service;
 
         public UserService(){
            this.ls=new List<User>{
-                new User(){Id=1,name="ytrtyrft",age=13},
-                new User(){Id=2,name="dsasd",age=13},
+                new User(){Id=1,name="michal",age=13},
+                new User(){Id=2,name="Gitty",age=13},
                 new User(){Id=3,name="jhyt",age=73}, 
                 new User(){Id=4,name="fds",age=18},
                 new User(){Id=5,name="ytrtysdrft",age=23},

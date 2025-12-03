@@ -41,6 +41,7 @@ namespace SongHomeWork.service{
         {
             song.Id=ls.Max(m=>m.Id)+1;
             ls.Add(song);
+
         }
 
         public  int update(int id, Song song){
