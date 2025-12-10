@@ -1,15 +1,11 @@
 {
   "Files": [
     {
-      "Id": "Z:\\יד תשפו\\חיימוביץ מיכל\\webAPI\\songV9\\wwwroot\\css\\site.css",
-      "PackagePath": "staticwebassets\\css\\site.css"
-    },
-    {
-      "Id": "Z:\\יד תשפו\\חיימוביץ מיכל\\webAPI\\songV9\\wwwroot\\index.html",
+      "Id": "Z:\\יד תשפו\\חיימוביץ מיכל\\webAPI\\song 8\\wwwroot\\index.html",
       "PackagePath": "staticwebassets\\index.html"
     },
     {
-      "Id": "Z:\\יד תשפו\\חיימוביץ מיכל\\webAPI\\songV9\\wwwroot\\js\\site.js",
+      "Id": "Z:\\יד תשפו\\חיימוביץ מיכל\\webAPI\\song 8\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
     {
@@ -23,6 +19,10 @@
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.songV9.props",
       "PackagePath": "buildTransitive\\songV9.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.songV9.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.songV9.Microsoft.AspNetCore.StaticWebAssets.props",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1XwyUUi/NAO0UQiS4j+WdY+of+JItwqNj0nc8JWDkgdhoqEYT10BBqcWyIFsxEQ6gxfPXs/CBWEYnpNI+gkQDg==",
+  "dgSpecHash": "QVvJyS/d8UI=",
   "success": true,
-  "projectFilePath": "Z:\\יד תשפו\\חיימוביץ מיכל\\webAPI\\songV9\\songV9.csproj",
+  "projectFilePath": "Z:\\יד תשפו\\חיימוביץ מיכל\\webAPI\\song 8\\songV9.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\huser\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\huser\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",

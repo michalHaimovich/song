@@ -1,26 +1,37 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
+using System;
 using UserNameSpace.Models;
 using MyIuser.interfaces;
+using System.Text.Json;
+using Microsoft.AspNetCore.Hosting;
+
 
 namespace MyUserSe.Service;
 
       public class UserService : Iuser{
         
-        public List<User> ls;
-
-        public UserService(){
-           this.ls=new List<User>{
-                new User(){Id=1,name="michal",age=13},
-                new User(){Id=2,name="Gitty",age=13},
-                new User(){Id=3,name="jhyt",age=73}, 
-                new User(){Id=4,name="fds",age=18},
-                new User(){Id=5,name="ytrtysdrft",age=23},
-                new User(){Id=6,name="gfd",age=16},
-                new User(){Id=7,name="a ",age=34}
-        };
-
+        private List<User> ls {get; }
+        private string filePath;
+        public UserService(IWebHostEnvironment webHost){
+             this.filePath=Path.Combine(webHost.ContentRootPath,"data","user.json");
+              using (var jsonFile = File.OpenText(filePath))
+            {
+                var content = jsonFile.ReadToEnd();
+                ls = JsonSerializer.Deserialize<List<User>>(content,
+                new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+            }
         }
+
+           private void saveToFile()
+        {
+            var text = JsonSerializer.Serialize(ls);
+            File.WriteAllText(filePath, text);
+        }  
 
         public  List<User> Get()
         {
@@ -41,6 +52,7 @@ namespace MyUserSe.Service;
         {
             user.Id=ls.Max(m=>m.Id)+1;
             ls.Add(user);
+            saveToFile();
         }
 
         public  int update(int id, User user){
@@ -50,6 +62,7 @@ namespace MyUserSe.Service;
             if(index==-1)
                 return 1;
             ls[index]=user;
+            saveToFile();
             return 2;
         }
 
@@ -59,6 +72,7 @@ namespace MyUserSe.Service;
                 return false;
              else{ 
                 ls.RemoveAt(index);
+                saveToFile();
                 return true;
             }
         }
