@@ -1,0 +1,9 @@
+1. create token service - static for 1st stage
+2. add login action (in the User controller)
+return token with claims: username + userid + user type
+3. create login page. calls users.login and saves token in local storage. each call to index.html or users.html should be redirected to login.html if there is no token saved in local storage.
+4. register services
+5. configure middleware
+6. add authorizations attributes
+
+
