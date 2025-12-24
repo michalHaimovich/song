@@ -3,12 +3,16 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>MUSIC - instruments</title>
+    <title>Song</title>
     <link rel="stylesheet" href="css/site.css" />
 </head>
 
 <body>
-  
+    <script>
+        if(true){
+             window.location.href='i.html';
+        }
+    </script>
     <h3>Add</h3>
     <form action="javascript:void(0);" method="POST" onsubmit="addItem()">
         <input type="text" id="add-name" placeholder="New User">
@@ -36,10 +40,10 @@
         <tbody id="musics"></tbody>
     </table>
     <a href="./User.html">go to users</a>
-
     <script src="js/SongSite.js" asp-append-version="true"></script>
     <script type="text/javascript">
-        getItems();
+        //chack the local storege\
+            getItems();
     </script>
 </body>
 

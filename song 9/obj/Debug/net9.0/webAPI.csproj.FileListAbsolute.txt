@@ -63,10 +63,8 @@ Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\webAPI
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\webAPI.genruntimeconfig.cache
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\ref\webAPI.dll
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\b3hj2x1gnm-cuqvmxb13f.gz
-Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\fu6vx1qp9q-59a6hbnubx.gz
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\81e5gvvwwd-zoxlk5se5i.gz
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\dcbdl0ednc-c4insr5426.gz
-Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\h1btcv3pzh-io79ogncyc.gz
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\data\song.json
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\rpswa.dswa.cache.json
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\rjimswa.dswa.cache.json
@@ -74,3 +72,16 @@ Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\rjsmra
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\staticwebassets.build.json.cache
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\data\user.json
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\fu6vx1qp9q-9lcc5u8338.gz
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\8p5be895wc-grcwu4l3uv.gz
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\2xvua2zodb-4zny0kd8ur.gz
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\h1btcv3pzh-zyko3bv0qg.gz

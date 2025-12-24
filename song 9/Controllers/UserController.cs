@@ -4,6 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using UserNameSpace.Models;
 using MyIuser.interfaces;
 using MyUserSe.Service;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using System.Text;
+using Token.Services;
 
 namespace MyUser.Controllers{
     [ApiController]
@@ -15,6 +19,47 @@ namespace MyUser.Controllers{
         public UserController(Iuser service){
             this.service=service;
         }
+
+
+        [HttpPost]
+        [Route("[action]")]
+        public ActionResult<String> Login([FromBody] User user)
+        {
+            //
+
+            bool containsTarget = false;
+            List<User> users= service.Get();
+
+            foreach (User u in users)
+            {
+                if (u.name ==user.name && u.Password == user.Password )
+                {
+                    containsTarget = true;
+                    break; 
+                }
+            }   
+
+            if(containsTarget== false)
+            { 
+                return Unauthorized();
+            }
+            else{
+                var claims = new List<Claim>
+                {
+                new Claim("username", user.name),
+                new Claim("userID", user.Id.ToString()),
+                new Claim("userType", "user")
+                };
+               
+                var token = TokenService.GetToken(claims);
+                
+                return new OkObjectResult(TokenService.WriteToken(token));
+            }      
+            
+
+            
+        }
+
 
          [HttpGet]
         public IEnumerable<User> Get()

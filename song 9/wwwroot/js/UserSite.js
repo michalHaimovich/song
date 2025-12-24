@@ -14,7 +14,7 @@ function addItem() {
     const item = {
         Id:1,
         name: addNameTextbox.value.trim(),
-        age:12
+        Password:12
     };
 
     fetch(uri, {
@@ -52,7 +52,7 @@ function updateItem() {
     const item = {
         id: parseInt(itemId, 10),
         name: document.getElementById('edit-name').value.trim(),
-        age:12
+        Password:12
     };
 
     fetch(`${uri}/${itemId}`, {
