@@ -12,10 +12,10 @@ namespace SongHomeWork.service{
 
       public class SongService : Isong{
         
-        public List<Song> ls {get; }
+        public List<Song>? ls {get; }
         private string filePath;
         public SongService(IWebHostEnvironment webHost){
-            this.filePath=Path.Combine(webHost.ContentRootPath,"data","song.json");
+            this.filePath=Path.Combine(webHost.ContentRootPath,"data","song.json"); //using arelative location
               using (var jsonFile = File.OpenText(filePath))
             {
                 var content = jsonFile.ReadToEnd();
@@ -31,6 +31,8 @@ namespace SongHomeWork.service{
             var text = JsonSerializer.Serialize(ls);
             File.WriteAllText(filePath, text);
         }
+
+        //need to be changed
         public  List<Song> Get()
         {
             return ls;

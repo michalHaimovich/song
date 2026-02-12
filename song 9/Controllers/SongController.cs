@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Mvc;
  using SongNameSpace.Models;
 using SongHomeWork.service;
 using WEBAPI.interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SongHomeWork.Controllers{
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
      public class SongController : ControllerBase{

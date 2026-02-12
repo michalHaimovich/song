@@ -66,11 +66,6 @@ Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compre
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\81e5gvvwwd-zoxlk5se5i.gz
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\dcbdl0ednc-c4insr5426.gz
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\data\song.json
-Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\rpswa.dswa.cache.json
-Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\rjimswa.dswa.cache.json
-Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\rjsmrazor.dswa.cache.json
-Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json
-Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\staticwebassets.build.json.cache
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\data\user.json
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
@@ -85,3 +80,8 @@ Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compre
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\2xvua2zodb-5uv300noye.gz
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\h1btcv3pzh-p2waf1qxk1.gz
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\8p5be895wc-sih13fzqsr.gz
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\rpswa.dswa.cache.json
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\rjimswa.dswa.cache.json
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\rjsmrazor.dswa.cache.json
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\staticwebassets.build.json.cache
