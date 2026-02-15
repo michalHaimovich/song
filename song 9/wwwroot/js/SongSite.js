@@ -10,9 +10,10 @@ function getItems() {
 
 function addItem() {
     const addNameTextbox = document.getElementById('add-name');
-
+    //need to add fields
     const item = {
         Id:1,
+        userId:1,
         name: addNameTextbox.value.trim(),
         composer:"DSa"
     };
