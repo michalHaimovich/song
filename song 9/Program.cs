@@ -3,6 +3,8 @@ using SongHomeWork.service;
 using MyMiddleware;
 using MyIuser.interfaces;
 using MyUserSe.Service;
+using Token.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +16,17 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.addSongService();
 builder.Services.addUserService();
 builder.Services.AddControllers();
+
+// Add JWT Authentication
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = TokenService.GetTokenValidationParameters();
+});
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();

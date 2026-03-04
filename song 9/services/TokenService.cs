@@ -10,7 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Token.Services
 {
-    public static class TokenService
+    public class TokenService 
     {
         private static SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("trbc0000666688884444trbc"));
         private static string issuer = "https://song-demo.com";
@@ -35,4 +35,5 @@ namespace Token.Services
         public static string WriteToken(SecurityToken token) =>
             new JwtSecurityTokenHandler().WriteToken(token);
     }
+
 }
