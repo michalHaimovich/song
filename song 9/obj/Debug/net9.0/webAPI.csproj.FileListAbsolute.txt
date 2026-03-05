@@ -128,8 +128,7 @@ C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\scopedcss\bundle\webAPI.styles.css
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\zbm078qita-{0}-zoxlk5se5i-zoxlk5se5i.gz
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\w8xivvyqop-{0}-5uv300noye-5uv300noye.gz
-C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\zzzijpd2c7-{0}-4w2l1zm2f4-4w2l1zm2f4.gz
-C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\shjnofoy7i-{0}-9lcc5u8338-9lcc5u8338.gz
+C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\hyhis1mbcp-{0}-tkfishxr01-tkfishxr01.gz
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\mucub6hffx-{0}-cuqvmxb13f-cuqvmxb13f.gz
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\staticwebassets.build.json.cache
@@ -142,5 +141,6 @@ C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\refint\webAPI.dll
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\webAPI.pdb
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\webAPI.genruntimeconfig.cache
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\ref\webAPI.dll
-C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\hyhis1mbcp-{0}-tkfishxr01-tkfishxr01.gz
-C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\l5278gjycv-{0}-u7f9wjyt8v-u7f9wjyt8v.gz
+C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\zzzijpd2c7-{0}-4w2l1zm2f4-4w2l1zm2f4.gz
+C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\l5278gjycv-{0}-gsr92evq05-gsr92evq05.gz
+C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\shjnofoy7i-{0}-y7t0w17bmp-y7t0w17bmp.gz

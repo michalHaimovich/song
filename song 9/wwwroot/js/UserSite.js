@@ -1,8 +1,16 @@
 const uri = '/User';
 let instruments = [];
+const token = localStorage.getItem('token');
 
 function getItems() {
-    fetch(uri)
+    fetch(uri ,{
+        method: 'GET',
+        headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization' : `Bearer ${token}`
+        }
+    })
         .then(response => response.json())
         .then(data => _displayItems(data))
         .catch(error => console.error('Unable to get items.', error));
@@ -21,7 +29,9 @@ function addItem() {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization' : `Bearer ${token}`
+
             },
             body: JSON.stringify(item)
         })
@@ -34,7 +44,12 @@ function addItem() {
 
 function deleteItem(id) {
     fetch(`${uri}/${id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization' : `Bearer ${token}`
+            },
         })
         .then(() => getItems())
         .catch(error => console.error('Unable to delete item.', error));
@@ -59,7 +74,9 @@ function updateItem() {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization' : `Bearer ${token}`
+
             },
             body: JSON.stringify(item)
         })

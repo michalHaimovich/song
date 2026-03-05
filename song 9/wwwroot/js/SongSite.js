@@ -3,8 +3,6 @@ let instruments = [];
 const token = localStorage.getItem('token');
 
 function getItems() {
-   
-    
     const headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
