@@ -1,89 +1,118 @@
 const uri = '/User';
 let instruments = [];
 const token = localStorage.getItem('token');
+const payloadBase64 = token.split('.')[1];
+const decodedToken = JSON.parse(atob(payloadBase64));
+const userRole = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+
+// הגדרות ראשוניות לפי תפקיד
+if (userRole === 'admin') {
+    document.getElementById('addForm').style.display = 'block';
+    document.getElementById('add-role').style.display = 'inline-block';
+    document.getElementById('role-header').style.display = 'table-cell';
+    document.getElementById('delete-header').style.display = 'table-cell';
+}
 
 function getItems() {
-    fetch(uri ,{
+    fetch(uri, {
         method: 'GET',
         headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization' : `Bearer ${token}`
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         }
     })
-        .then(response => response.json())
-        .then(data => _displayItems(data))
-        .catch(error => console.error('Unable to get items.', error));
+    .then(response => response.json())
+    .then(data => _displayItems(data))
+    .catch(error => console.error('Unable to get items.', error));
 }
 
 function addItem() {
     const addNameTextbox = document.getElementById('add-name');
+    const addPasswordTextbox = document.getElementById('add-password');
+    const addRoleTextbox = document.getElementById('add-role');
 
     const item = {
-        Id:1,
+        Id: 0,
         name: addNameTextbox.value.trim(),
-        Password:12
+        Password: addPasswordTextbox.value.trim(),
+        // מנהל יכול לקבוע תפקיד, משתמש רגיל תמיד יהיה 'user'
+        Role: userRole === 'admin' ? (addRoleTextbox.value.trim() || 'user') : 'user'
     };
 
     fetch(uri, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization' : `Bearer ${token}`
-
-            },
-            body: JSON.stringify(item)
-        })
-        .then(() => {
-            getItems();
-            addNameTextbox.value = '';
-        })
-        .catch(error => console.error('Unable to add item.', error));
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(item)
+    })
+    .then(() => {
+        getItems();
+        addNameTextbox.value = '';
+        addPasswordTextbox.value = '';
+        addRoleTextbox.value = '';
+    })
+    .catch(error => console.error('Unable to add item.', error));
 }
 
 function deleteItem(id) {
     fetch(`${uri}/${id}`, {
-            method: 'DELETE',
-              headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization' : `Bearer ${token}`
-            },
-        })
-        .then(() => getItems())
-        .catch(error => console.error('Unable to delete item.', error));
+        method: 'DELETE',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+    })
+    .then(() => getItems())
+    .catch(error => console.error('Unable to delete item.', error));
 }
 
 function displayEditForm(id) {
-    const item = instruments.find(item => item.id === id);
-    document.getElementById('edit-id').value=item.id;
+    const item = instruments.find(item => item.Id === id || item.id === id);
+
+    document.getElementById('edit-id').value = item.Id || item.id;
+    document.getElementById('edit-id-display').innerText = `Editing User ID: ${item.Id || item.id}`;
     document.getElementById('edit-name').value = item.name;
+    document.getElementById('edit-password').value = item.Password || item.password;
+    
     document.getElementById('editForm').style.display = 'block';
+
+    // הצגת עריכת תפקיד רק למנהל
+    if (userRole === 'admin') {
+        const roleInput = document.getElementById('edit-role');
+        roleInput.style.display = 'inline-block';
+        roleInput.value = item.Role || item.role || 'user';
+    }
 }
 
 function updateItem() {
     const itemId = document.getElementById('edit-id').value;
+
     const item = {
-        id: parseInt(itemId, 10),
+        Id: parseInt(itemId, 10),
         name: document.getElementById('edit-name').value.trim(),
-        Password:12
+        Password: document.getElementById('edit-password').value.trim(),
+        Role: userRole === 'admin' ? document.getElementById('edit-role').value.trim() : 'user'
     };
 
     fetch(`${uri}/${itemId}`, {
-            method: 'PUT',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization' : `Bearer ${token}`
-
-            },
-            body: JSON.stringify(item)
-        })
-        .then(() => getItems())
-        .catch(error => console.error('Unable to update item.', error));
-
-    closeInput();
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(item)
+    })
+    .then(() => {
+        getItems();
+        closeInput();
+    })
+    .catch(error => console.error('Unable to update item.', error));
 
     return false;
 }
@@ -92,43 +121,45 @@ function closeInput() {
     document.getElementById('editForm').style.display = 'none';
 }
 
-// function _displayCount(itemCount) {
-//     const name = (itemCount === 1) ? 'music' : 'instruments';
-
-//     document.getElementById('counter').innerText = `${itemCount} ${name}`;
-// }
-
 function _displayItems(data) {
-    debugger;
     const tBody = document.getElementById('musics');
     tBody.innerHTML = '';
-
-  //  _displayCount(data.length);
-
     const button = document.createElement('button');
 
     data.forEach(item => {
+        let tr = tBody.insertRow();
+        let currentId = item.Id || item.id;
 
+        // עמודה 0: ID (לכולם)
+        tr.insertCell(0).innerText = currentId;
 
+        // עמודה 1: שם (לכולם)
+        tr.insertCell(1).innerText = item.name;
+
+        // עמודה 2: תפקיד (רק למנהל)
+        if (userRole === 'admin') {
+            tr.insertCell(2).innerText = item.Role || item.role || 'user';
+        }
+
+        // עמודה הבאה: סיסמה
+        let passwordCell = tr.insertCell(userRole === 'admin' ? 3 : 2);
+        passwordCell.innerText = item.Password || item.password;
+
+        // עמודה הבאה: עריכה
+        let editCell = tr.insertCell(userRole === 'admin' ? 4 : 3);
         let editButton = button.cloneNode(false);
         editButton.innerText = 'Edit';
-        editButton.setAttribute('onclick', `displayEditForm(${item.id})`);
+        editButton.setAttribute('onclick', `displayEditForm(${currentId})`);
+        editCell.appendChild(editButton);
 
-        let deleteButton = button.cloneNode(false);
-        deleteButton.innerText = 'Delete';
-        deleteButton.setAttribute('onclick', `deleteItem(${item.id})`);
-
-        let tr = tBody.insertRow();
-
-        let td2 = tr.insertCell(0);
-        let textNode = document.createTextNode(item.name);
-        td2.appendChild(textNode);
-
-        let td3 = tr.insertCell(1);
-        td3.appendChild(editButton);
-
-        let td4 = tr.insertCell(2);
-        td4.appendChild(deleteButton);
+        // עמודה הבאה: מחיקה (רק למנהל)
+        if (userRole === 'admin') {
+            let deleteCell = tr.insertCell(5);
+            let deleteButton = button.cloneNode(false);
+            deleteButton.innerText = 'Delete';
+            deleteButton.setAttribute('onclick', `deleteItem(${currentId})`);
+            deleteCell.appendChild(deleteButton);
+        }
     });
 
     instruments = data;

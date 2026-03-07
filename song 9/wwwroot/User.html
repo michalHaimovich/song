@@ -3,42 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Users Management</title>
     <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
-        <form action="javascript:void(0);" method="POST" onsubmit="addItem()">
-        <input type="text" id="add-name" placeholder="New music">
+    <script>
+        if (localStorage.getItem('token') == null) {
+            window.location.href = 'i.html';
+        }
+    </script>
+    
+    <form action="javascript:void(0);" method="POST" onsubmit="addItem()" style="display:none;" id="addForm">
+        <input type="text" id="add-name" placeholder="User Name" required>
+        <input type="text" id="add-password" placeholder="Password" required>
+        <input type="text" id="add-role" placeholder="Role (admin/user)" style="display:none;">
         <input type="submit" value="Add">
     </form>
 
-    <div id="editForm">
-        <h3>Edit</h3>
+    <div id="editForm" style="display: none;">
+        <h3>Edit User</h3>
         <form action="javascript:void(0);" onsubmit="updateItem()">
-            <input type="hidden" id="edit-id">
-            <input type="checkbox" id="edit-isAccompanying">
-            <input type="text" id="edit-name">
+            <div id="edit-id-display" style="font-weight: bold; margin-bottom: 10px;"></div>
+            <input type="hidden" id="edit-id"> 
+            
+            <input type="text" id="edit-name" placeholder="Name" required>
+            <input type="text" id="edit-password" placeholder="Password" required>
+            <input type="text" id="edit-role" placeholder="Role" style="display: none;">
+            
             <input type="submit" value="Save">
-            <a onclick="closeInput()" aria-label="Close">&#10006;</a>
+            <a onclick="closeInput()" aria-label="Close" style="cursor: pointer;">&#10006;</a>
         </form>
     </div>
 
-    <p id="counter"></p>
-
     <table>
         <tr>
-            <th>Name</th>
-            <th></th>
-            <th></th>
+            <th>ID</th> <th>Name</th> 
+            <th style="display:none;" id="role-header">Role</th> <th>Password</th> 
+            <th>Edit</th>
+            <th style="display:none;" id="delete-header">Delete</th>
         </tr>
         <tbody id="musics"></tbody>
-    </table> 
+    </table>
 
+    <br>
     <a href="index.html">to songs</a>
+    
     <script src="js/UserSite.js" asp-append-version="true"></script>
     <script type="text/javascript">
         getItems();
     </script>
-   
 </body>
 </html>

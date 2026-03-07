@@ -142,5 +142,5 @@ C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\ref\webAPI.dll
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\zzzijpd2c7-{0}-4w2l1zm2f4-4w2l1zm2f4.gz
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\hyhis1mbcp-{0}-qsfv7dxxah-qsfv7dxxah.gz
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\l5278gjycv-{0}-5opeknrbgq-5opeknrbgq.gz
-C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\shjnofoy7i-{0}-7a5xohesaz-7a5xohesaz.gz
-C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\mucub6hffx-{0}-uxui16s826-uxui16s826.gz
+C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\shjnofoy7i-{0}-5b7wig3u5i-5b7wig3u5i.gz
+C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\mucub6hffx-{0}-1uh4hl0n6h-1uh4hl0n6h.gz

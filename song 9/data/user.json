@@ -1,1 +1,1 @@
-[{"Id":5,"name":"yehudit","Password":"1234","Role":null},{"Id":6,"name":"michal","Password":"0684","Role":"admin"},{"Id":7,"name":"gitty","Password":"12","Role":null}]
+[{"Id":6,"name":"michal","Password":"0684","Role":"admin"},{"Id":7,"name":"gitty","Password":"12","Role":"user"},{"Id":8,"name":"tovy!","Password":"12","Role":"user"}]

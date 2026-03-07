@@ -1,59 +1,64 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <title>Song</title>
     <link rel="stylesheet" href="css/site.css" />
 </head>
-
 <body>
     <script>
-        if(localStorage.getItem('token')==null){
-             window.location.href='i.html';
+        const currentToken = localStorage.getItem('token');
+        if (!currentToken) {
+            window.location.href = 'i.html';
         }
     </script>
+    
+    <h2 id="user-greeting"></h2>
+    
     <h1>My Songs</h1>
     <a href="./User.html">← Back to Users</a>
     <hr>
-    
+
     <h3>Add New Song</h3>
-    <form action="javascript:void(0);" method="POST" onsubmit="addItem()">
+    <form id="add-form">
         <input type="text" id="add-name" placeholder="Song Name" required>
         <input type="text" id="add-composer" placeholder="Composer" required>
+        <input type="number" id="add-userId" placeholder="User ID" style="display:none;">
         <input type="submit" value="Add Song">
     </form>
 
-    <div id="editForm">
+    <div id="editForm" style="display:none;">
         <h3>Edit Song</h3>
-        <form action="javascript:void(0);" onsubmit="updateItem()">
+        <form id="edit-form">
             <input type="hidden" id="edit-id">
             <input type="text" id="edit-name" placeholder="Song Name" required>
             <input type="text" id="edit-composer" placeholder="Composer" required>
+            <input type="number" id="edit-userId" placeholder="User ID" style="display:none;">
             <input type="submit" value="Save">
-            <a onclick="closeInput()" aria-label="Close">&#10006;</a>
+            <a href="#" onclick="closeInput(); return false;" aria-label="Close">&#10006;</a>
         </form>
     </div>
 
     <p id="counter"></p>
 
     <table border="1" cellpadding="10" cellspacing="0">
-        <tr>
-            <th>ID</th>
-            <th>Song Name</th>
-            <th>Composer</th>
-            <th>User ID</th>
-            <th>Actions</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Song Name</th>
+                <th>Composer</th>
+                <th>User ID</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
         <tbody id="musics"></tbody>
     </table>
     <hr>
     <a href="./User.html">← Back to Users</a>
+    
     <script src="js/SongSite.js" asp-append-version="true"></script>
     <script type="text/javascript">
-        //chack the local storege\
-            getItems();
+        initPage();
     </script>
 </body>
-
 </html>
