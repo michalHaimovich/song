@@ -5,6 +5,7 @@ using MyIuser.interfaces;
 using MyUserSe.Service;
 using Token.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using SongHomeWork.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.addSongService();
 builder.Services.addUserService();
 builder.Services.AddControllers();
+builder.Services.AddActiveUser();
+builder.Services.AddHttpContextAccessor();
+builder.Services.addSongRepository();
 
 // Add JWT Authentication
 builder.Services.AddAuthentication(options =>

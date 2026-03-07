@@ -79,7 +79,7 @@ namespace MyUser.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "admin,user")] 
+        [Authorize(Roles = "admin,user")]
         public ActionResult<IEnumerable<User>> Get()
         {
             // 1. שליפת התפקיד וה-ID מתוך הטוקן
@@ -129,14 +129,25 @@ namespace MyUser.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin,user")]
         public ActionResult update(int id, User user)
         {
+            var userRole = this.User.FindFirst(ClaimTypes.Role)?.Value;
+            var tokenUserIdStr = this.User.FindFirst("userID")?.Value;
+
+            if (userRole != "admin" && tokenUserIdStr != id.ToString())
+            {
+                return Forbid();
+            }
+            if (userRole != "admin")
+            {
+                user.Role = "user";
+            }
             int i = service.update(id, user);
-            if (i == 0)
-                return BadRequest();
-            if (i == 1)
-                return NotFound();
+
+            if (i == 0) return BadRequest();
+            if (i == 1) return NotFound();
+
             return NoContent();
         }
 

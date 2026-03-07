@@ -2,72 +2,66 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using System;
-using UserNameSpace.Models;
-using MyIuser.interfaces;
+using System.Net;
+using SongNameSpace.Models;
+using WEBAPI.interfaces;
 using System.Text.Json;
 using Microsoft.AspNetCore.Hosting;
-using WEBAPI.interfaces;
 
+namespace SongHomeWork.service{
 
-namespace MyUserSe.Service;
-
-      public class UserService : Iuser{
+      public class SongRepository : ISongReposetory{
         
-        private List<User> ls {get; }
+        public List<Song>? ls {get; }
         private string filePath;
-
-        public UserService(IWebHostEnvironment webHost ){
-             this.filePath=Path.Combine(webHost.ContentRootPath,"data","user.json");
-  
+        public SongRepository(IWebHostEnvironment webHost){
+            this.filePath=Path.Combine(webHost.ContentRootPath,"data","song.json"); //using arelative location
               using (var jsonFile = File.OpenText(filePath))
             {
                 var content = jsonFile.ReadToEnd();
-                ls = JsonSerializer.Deserialize<List<User>>(content,
+                ls = JsonSerializer.Deserialize<List<Song>>(content,
                 new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true
                 });
             }
         }
-
-           private void saveToFile()
+          private void saveToFile()
         {
             var text = JsonSerializer.Serialize(ls);
             File.WriteAllText(filePath, text);
-        }  
-
-        public  List<User> Get()
+        }
+        public  List<Song> Get()
         {
-
-            List<User> Users = [..ls];
-            return Users;
+            List<Song> songs = [.. ls];
+            return songs;
         }
 
 
 
-        public  User Get(int id)
+        public  Song Get(int id)
         {
             return ls.FirstOrDefault(m=>m.Id==id)!;
         }
 
 
-        public  void Create(User user)
+        public  void Create(Song song)
         {
-            user.Id=ls.Max(m=>m.Id)+1;
-            ls.Add(user);
+            song.Id=ls.Max(m=>m.Id)+1;
+            ls.Add(song);
             saveToFile();
         }
 
-        public  int update(int id, User user){
-            if(id!= user.Id)
+        public  int update(int id, Song song){
+            if(id!= song.Id)
                 return 0;
             var index=ls.FindIndex(p=>p.Id==id);
             if(index==-1)
                 return 1;
-            ls[index].name = user.name;
-            ls[index].Role = user.Role;
+            ls[index]=song;
             saveToFile();
             return 2;
+
         }
 
         public  bool delete(int id){
@@ -83,10 +77,11 @@ namespace MyUserSe.Service;
 
      }
 
-     public static class UserServiceExtention
+     public static class SongRepositoryExtention
      {
-        public static void addUserService(this IServiceCollection service){
-            service.AddSingleton<Iuser, UserService>();
+        public static void addSongRepository(this IServiceCollection service){
+            service.AddSingleton<ISongReposetory, SongRepository>();
         }
      }
 
+}

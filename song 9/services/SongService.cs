@@ -8,83 +8,83 @@ using WEBAPI.interfaces;
 using System.Text.Json;
 using Microsoft.AspNetCore.Hosting;
 
-namespace SongHomeWork.service{
+namespace SongHomeWork.service;
 
-      public class SongService : Isong{
-        
-        public List<Song>? ls {get; }
-        private string filePath;
-        public SongService(IWebHostEnvironment webHost){
-            this.filePath=Path.Combine(webHost.ContentRootPath,"data","song.json"); //using arelative location
-              using (var jsonFile = File.OpenText(filePath))
-            {
-                var content = jsonFile.ReadToEnd();
-                ls = JsonSerializer.Deserialize<List<Song>>(content,
-                new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                });
-            }
-        }
-          private void saveToFile()
+
+public class SongService : Isong
+{
+    IActiveUser activeUser;
+
+    ISongReposetory songRepository;
+
+    public SongService(ISongReposetory songRepository, IActiveUser activeUser)
+    {
+        this.songRepository = songRepository;
+        this.activeUser = activeUser;
+    }
+
+    public List<Song> Get()
+    {
+        var userRole = activeUser.ActiveUser.Role;
+        if (userRole == "admin")
         {
-            var text = JsonSerializer.Serialize(ls);
-            File.WriteAllText(filePath, text);
+            return songRepository.Get();
         }
+        var userId = activeUser.ActiveUser.Id;
+        var userSongs = songRepository.Get().Where(s => s.userId == userId).ToList();
+        return userSongs;
+    }
 
-        //need to be changed
-        public  List<Song> Get()
+
+
+
+    public Song Get(int id)
+    {
+        var song = songRepository.Get(id);
+        if (song != null && song.userId != activeUser.ActiveUser.Id && activeUser.ActiveUser.Role != "admin")
         {
-            return ls;
+            return null;
         }
+        return song;
+    }
 
 
-
-        public  Song Get(int id)
+    public void Create(Song song)
+    {
+        if (activeUser.ActiveUser.Role != "admin" && song.userId != activeUser.ActiveUser.Id)
         {
-           
-
-            return ls.FirstOrDefault(m=>m.Id==id)!;
+            throw new UnauthorizedAccessException("You are not allowed to create a song for another user.");
         }
+        songRepository.Create(song);
+    }
 
-
-        public  void Create(Song song)
+    public int update(int id, Song song)
+    {
+        if (activeUser.ActiveUser.Role != "admin" && song.userId != activeUser.ActiveUser.Id)
         {
-            song.Id=ls.Max(m=>m.Id)+1;
-            ls.Add(song);
-            saveToFile();
+            throw new UnauthorizedAccessException("You are not allowed to update a song for another user.");
         }
+        return songRepository.update(id, song);
+    }
 
-        public  int update(int id, Song song){
-            if(id!= song.Id)
-                return 0;
-            var index=ls.FindIndex(p=>p.Id==id);
-            if(index==-1)
-                return 1;
-            ls[index]=song;
-            saveToFile();
-            return 2;
-
+    public bool delete(int id)
+    {
+        var song = songRepository.Get(id);
+        if (song == null)
+            return false;
+        if (activeUser.ActiveUser.Role != "admin" && song.userId != activeUser.ActiveUser.Id)
+        {
+            return false;
         }
-
-        public  bool delete(int id){
-             var index=ls.FindIndex(p=>p.Id==id);
-             if(index==-1)
-                return false;
-             else{ 
-                ls.RemoveAt(index);
-                saveToFile();
-                return true;
-            }
-        }
-
-     }
-
-     public static class SongServiceExtention
-     {
-        public static void addSongService(this IServiceCollection service){
-            service.AddSingleton<Isong, SongService>();
-        }
-     }
+        return songRepository.delete(id);
+    }
 
 }
+public static class SongServiceExtention
+{
+    public static void addSongService(this IServiceCollection service)
+    {
+        service.AddScoped<Isong, SongService>();
+    }
+}
+
