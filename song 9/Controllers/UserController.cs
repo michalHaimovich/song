@@ -25,59 +25,7 @@ namespace MyUser.Controllers
         }
 
 
-        [HttpPost]
-        [Route("[action]")]
-        [AllowAnonymous]
-        public ActionResult<String> Login([FromBody] User user)
-        {
-            if (user.name == null || user.Password == null)
-                return BadRequest();
-
-            if (user.name == "michal" && user.Password == "0684")
-            {
-                var claims = new List<Claim>
-                {
-                new Claim("username", user.name),
-                new Claim("userID", user.Id.ToString()),
-                new Claim(ClaimTypes.Role, "admin")
-                };
-
-                var token = TokenService.GetToken(claims);
-
-                return new OkObjectResult(TokenService.WriteToken(token));
-            }
-
-            bool containsTarget = false;
-            List<User> users = service.Get();
-
-            foreach (User u in users)
-            {
-                if (u.name == user.name && u.Password == user.Password)
-                {
-                    containsTarget = true;
-                    break;
-                }
-            }
-
-            if (containsTarget == false)
-            {
-                return Unauthorized();
-            }
-            else
-            {
-                var claims = new List<Claim>
-                {
-                new Claim("username", user.name),
-                new Claim("userID", user.Id.ToString()),
-                new Claim(ClaimTypes.Role, "user")
-                };
-
-                var token = TokenService.GetToken(claims);
-
-                return new OkObjectResult(TokenService.WriteToken(token));
-            }
-        }
-
+       
         [HttpGet]
         [Authorize(Roles = "admin,user")]
         public ActionResult<IEnumerable<User>> Get()

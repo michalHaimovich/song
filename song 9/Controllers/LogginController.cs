@@ -1,0 +1,69 @@
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
+using SongNameSpace.Models;
+using SongHomeWork.service;
+using WEBAPI.interfaces;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using UserNameSpace.Models;
+using Token.Services;
+using MyIuser.interfaces;
+
+namespace SongHomeWork.Controllers;
+
+[Authorize]
+[ApiController]
+[Route("[controller]")]
+public class LogginController : ControllerBase
+{
+
+    Iuser service;
+    public LogginController(Iuser service)
+    {
+        this.service = service;
+    }
+
+    [HttpPost]
+    [Route("[action]")]
+    [AllowAnonymous]
+    public ActionResult<String> Login([FromBody] User user)
+    {
+        if (user.name == null || user.Password == null)
+            return BadRequest();
+
+        List<User> users = service.Get();
+
+        foreach (User u in users)
+        {
+            if (u.name == user.name && u.Password == user.Password)
+            {
+                List<Claim> claims;
+                if (u.Role == "admin")
+                {
+                    claims = new List<Claim>
+                     {
+                         new Claim("username", u.name),
+                         new Claim("userID", u.Id.ToString()),
+                         new Claim(ClaimTypes.Role, "admin")
+                    };
+                }
+                else
+                {
+                    claims = new List<Claim>
+                    {
+                         new Claim("username", user.name),
+                         new Claim("userID", user.Id.ToString()),
+                     new Claim(ClaimTypes.Role, "user")
+                    };   
+                }
+
+                var token = TokenService.GetToken(claims);
+
+                return new OkObjectResult(TokenService.WriteToken(token));
+            }
+        }
+        return Unauthorized();
+    }
+
+}

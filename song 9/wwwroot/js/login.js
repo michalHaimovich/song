@@ -1,5 +1,5 @@
 
-const uri = '/User/Login';
+const uri = '/Loggin/Login';
 
 function chack() {
 
