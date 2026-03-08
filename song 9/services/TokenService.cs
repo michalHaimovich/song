@@ -8,32 +8,31 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
 
-namespace Token.Services
+namespace Token.Services;
+
+public class TokenService
 {
-    public class TokenService 
-    {
-        private static SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("trbc0000666688884444trbc"));
-        private static string issuer = "https://song-demo.com";
-        public static SecurityToken GetToken(List<Claim> claims) =>
-            new JwtSecurityToken(
-                issuer,
-                issuer,
-                claims,
-                expires: DateTime.Now.AddDays(30.0),
-                signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
-            );
+    private static SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("!@#$%^&*trbc00006666MGYTYYPECDR88884444trbc*&^%$#@!PL<MKTRWEFCesgkjsrg%rg54gfg"));
+    private static string issuer = "https://song-demo.com";
+    public static SecurityToken GetToken(List<Claim> claims) =>
+        new JwtSecurityToken(
+            issuer,
+            issuer,
+            claims,
+            expires: DateTime.Now.AddDays(30.0),
+            signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
+        );
 
-        public static TokenValidationParameters GetTokenValidationParameters() =>
-            new TokenValidationParameters
-            {
-                ValidIssuer = issuer,
-                ValidAudience = issuer,
-                IssuerSigningKey = key,
-                ClockSkew = TimeSpan.Zero // remove delay of token when expire
-            };
+    public static TokenValidationParameters GetTokenValidationParameters() =>
+        new TokenValidationParameters
+        {
+            ValidIssuer = issuer,
+            ValidAudience = issuer,
+            IssuerSigningKey = key,
+            ClockSkew = TimeSpan.Zero // remove delay of token when expire
+        };
 
-        public static string WriteToken(SecurityToken token) =>
-            new JwtSecurityTokenHandler().WriteToken(token);
-    }
-
+    public static string WriteToken(SecurityToken token) =>
+        new JwtSecurityTokenHandler().WriteToken(token);
 }
+

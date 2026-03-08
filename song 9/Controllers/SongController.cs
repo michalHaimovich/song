@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using SongNameSpace.Models;
-using SongHomeWork.service;
-using WEBAPI.interfaces;
+using SongApi.Models;
+using SongApi.Services;
+using SongApi.interfaces;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 
-namespace SongHomeWork.Controllers;
+namespace SongApi.Controllers;
 
 [Authorize]
 [ApiController]
@@ -28,8 +28,6 @@ public class SongController : ControllerBase
     {
         return service.Get();
     }
-
-
     [HttpGet("{id}")]
     [Authorize(Roles = "admin,user")]
     public ActionResult<Song> Get(int id)
@@ -64,7 +62,7 @@ public class SongController : ControllerBase
         int i;
         try
         {
-            i = service.update(id, song);
+            i = service.Update(id, song);
             if (i == 0)
                 return BadRequest();
             if (i == 1)
@@ -84,7 +82,7 @@ public class SongController : ControllerBase
     [Authorize(Roles = "admin,user")]
     public ActionResult delete(int id)
     {
-        bool flag = service.delete(id);
+        bool flag = service.Delete(id);
         if (!flag)
             return NotFound();
         return NoContent();

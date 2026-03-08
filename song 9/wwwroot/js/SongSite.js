@@ -1,14 +1,16 @@
 const uri = '/Song';
 let instruments = [];
-const token = localStorage.getItem('token');
+const token = sessionStorage.getItem('token');
 let currentUser = null;
+let currentUserId = null;
 
-// פונקציית עזר לפענוח הטוקן בבטחה
+// 1. קודם כל: פונקציית העזר לפענוח הטוקן
 function parseJwt(jwtToken) {
+    if (!jwtToken) return null;
     try {
         const base64Url = jwtToken.split('.')[1];
         const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         }).join(''));
         return JSON.parse(jsonPayload);
@@ -17,30 +19,90 @@ function parseJwt(jwtToken) {
     }
 }
 
-function initPage() {
-    if (!token) return;
-    
-    // שליפת נתונים מהטוקן
+// 2. פענוח הטוקן וחילוץ הנתונים (מבוצע מיד כשהדף עולה)
+if (token) {
     currentUser = parseJwt(token);
-    
-    // מציאת השדה של התפקיד (Role) - השם המדויק תלוי באיך שהגדרת בשרת
-    // לרוב מיוצג תחת הקישור הארוך או 'role'
+    // חילוץ ה-ID לפי התקן החדש של מיקרוסופט
+    currentUserId = currentUser['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+}
+
+// 3. הגדרת SignalR (רק אם יש טוקן תקין)
+if (token && currentUserId) {
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/activityHub", {
+            accessTokenFactory: () => token
+        })
+        .withAutomaticReconnect()
+        .build();
+
+    // --- ניהול חלון ההודעות (שומר 10 אחרונות) ---
+    let notifications = [];
+
+    function addNotification(message) {
+        // נוסיף שעה מדויקת להודעה כדי שזה ייראה מקצועי
+        const timeString = new Date().toLocaleTimeString();
+        const fullMessage = `[${timeString}] ${message}`;
+
+        // מוסיפים לתחילת המערך (כדי שההודעה החדשה תהיה למעלה)
+        notifications.unshift(fullMessage);
+
+        // אם יש יותר מ-10, מוחקים את הישנה ביותר (מהסוף)
+        if (notifications.length > 10) {
+            notifications.pop();
+        }
+
+        // מציירים מחדש את רשימת ההודעות ב-HTML
+        const list = document.getElementById('notifications-list');
+        if (list) {
+            list.innerHTML = ''; // מנקים את הרשימה
+            notifications.forEach(msg => {
+                let li = document.createElement('li');
+                li.style.padding = "5px 0";
+                li.style.borderBottom = "1px solid #eee";
+                li.innerText = msg;
+                list.appendChild(li);
+            });
+        }
+    }
+
+    // --- האזנה להודעות מהשרת ---
+
+    connection.on("ReceivePersonalActivity", (message, song) => {
+        // קוראים לפונקציה החדשה שלנו במקום alert
+        addNotification("🔔 " + message);
+        getItems();
+    });
+
+    connection.on("ReceiveGlobalActivity", (message, song, performerId) => {
+        if (performerId.toString() !== currentUserId.toString()) {
+            // קוראים לפונקציה החדשה במקום alert
+            addNotification("👑 " + message);
+            getItems();
+        }
+    });
+
+    connection.start()
+        .then(() => console.log("✅ Connected to SignalR Hub successfully!"))
+        .catch(err => console.error("❌ SignalR Connection Error: ", err));
+}
+
+// 4. אתחול הדף (הפונקציה שהייתה לך, עכשיו קצת יותר נקייה)
+function initPage() {
+    if (!currentUser) return;
+
     const roleClaim = currentUser['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] || currentUser['userType'] || currentUser['role'];
     const isAdmin = roleClaim === 'admin';
     const username = currentUser['username'] || 'Unknown User';
 
-    // עדכון כותרת
-    document.getElementById('user-greeting').innerText = isAdmin 
-        ? `Hello, ${username} (Admin)` 
+    document.getElementById('user-greeting').innerText = isAdmin
+        ? `Hello, ${username} (Admin)`
         : `Hello, ${username}`;
 
-    // הצגת שדות ה-UserID למנהל בלבד
     if (isAdmin) {
         document.getElementById('add-userId').style.display = 'inline-block';
         document.getElementById('edit-userId').style.display = 'inline-block';
     }
 
-    // חיבור אירועי submit
     document.getElementById('add-form').addEventListener('submit', addItem);
     document.getElementById('edit-form').addEventListener('submit', updateItem);
 
@@ -55,24 +117,23 @@ function getItems() {
             'Authorization': `Bearer ${token}`
         }
     })
-    .then(response => {
-        if (!response.ok) throw new Error('Failed to fetch items');
-        return response.json();
-    })
-    .then(data => _displayItems(data))
-    .catch(error => console.error('Unable to get items.', error));
+        .then(response => {
+            if (!response.ok) throw new Error('Failed to fetch items');
+            return response.json();
+        })
+        .then(data => _displayItems(data))
+        .catch(error => console.error('Unable to get items.', error));
 }
 
 function addItem(event) {
-    event.preventDefault(); // מניעת רענון הדף
+    event.preventDefault();
 
     const roleClaim = currentUser['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] || currentUser['userType'];
     const isAdmin = roleClaim === 'admin';
-    
-    // אם הוא מנהל, ניקח את מה שהקליד בשדה. אם לא, ניקח מהטוקן.
-    const userIdValue = isAdmin 
+
+    const userIdValue = isAdmin
         ? parseInt(document.getElementById('add-userId').value.trim(), 10)
-        : parseInt(currentUser.userID, 10);
+        : parseInt(currentUserId, 10); // שינוי חשוב: משתמשים ב-currentUserId שחילצנו בהתחלה
 
     const item = {
         id: 0,
@@ -90,15 +151,14 @@ function addItem(event) {
         },
         body: JSON.stringify(item)
     })
-    .then(response => {
-        if (!response.ok) throw new Error('Failed to add item');
-        getItems();
-        document.getElementById('add-name').value = '';
-        document.getElementById('add-composer').value = '';
-        if (isAdmin) document.getElementById('add-userId').value = '';
-        getItems();
-    })
-    .catch(error => console.error('Unable to add item.', error));
+        .then(response => {
+            if (!response.ok) throw new Error('Failed to add item');
+            getItems();
+            document.getElementById('add-name').value = '';
+            document.getElementById('add-composer').value = '';
+            if (isAdmin) document.getElementById('add-userId').value = '';
+        })
+        .catch(error => console.error('Unable to add item.', error));
 }
 
 function deleteItem(id) {
@@ -108,11 +168,11 @@ function deleteItem(id) {
             'Authorization': `Bearer ${token}`
         }
     })
-    .then(response => {
-        if (!response.ok) throw new Error('Failed to delete item');
-        getItems();
-    })
-    .catch(error => console.error('Unable to delete item.', error));
+        .then(response => {
+            if (!response.ok) throw new Error('Failed to delete item');
+            getItems();
+        })
+        .catch(error => console.error('Unable to delete item.', error));
 }
 
 function displayEditForm(id) {
@@ -122,8 +182,7 @@ function displayEditForm(id) {
     document.getElementById('edit-id').value = item.id;
     document.getElementById('edit-name').value = item.name;
     document.getElementById('edit-composer').value = item.composer;
-    
-    // מילוי ה-userId אם מדובר במנהל
+
     const roleClaim = currentUser['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] || currentUser['userType'];
     if (roleClaim === 'admin') {
         document.getElementById('edit-userId').value = item.userId;
@@ -138,10 +197,10 @@ function updateItem(event) {
     const itemId = parseInt(document.getElementById('edit-id').value, 10);
     const roleClaim = currentUser['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] || currentUser['userType'];
     const isAdmin = roleClaim === 'admin';
-    
-    const userIdValue = isAdmin 
+
+    const userIdValue = isAdmin
         ? parseInt(document.getElementById('edit-userId').value.trim(), 10)
-        : parseInt(currentUser.userID, 10);
+        : parseInt(currentUserId, 10); // שינוי חשוב: משתמשים ב-currentUserId
 
     const item = {
         id: itemId,
@@ -159,12 +218,12 @@ function updateItem(event) {
         },
         body: JSON.stringify(item)
     })
-    .then(response => {
-        if (!response.ok) throw new Error('Failed to update item');
-        getItems();
-        closeInput();
-    })
-    .catch(error => console.error('Unable to update item.', error));
+        .then(response => {
+            if (!response.ok) throw new Error('Failed to update item');
+            getItems();
+            closeInput();
+        })
+        .catch(error => console.error('Unable to update item.', error));
 }
 
 function closeInput() {
@@ -178,26 +237,18 @@ function _displayItems(data) {
 
     data.forEach(item => {
         let tr = tBody.insertRow();
-
-        let td1 = tr.insertCell(0);
-        td1.appendChild(document.createTextNode(item.id));
-
-        let td2 = tr.insertCell(1);
-        td2.appendChild(document.createTextNode(item.name));
-
-        let td3 = tr.insertCell(2);
-        td3.appendChild(document.createTextNode(item.composer));
-
-        let td4 = tr.insertCell(3);
-        td4.appendChild(document.createTextNode(item.userId));
+        tr.insertCell(0).appendChild(document.createTextNode(item.id));
+        tr.insertCell(1).appendChild(document.createTextNode(item.name));
+        tr.insertCell(2).appendChild(document.createTextNode(item.composer));
+        tr.insertCell(3).appendChild(document.createTextNode(item.userId));
 
         let td5 = tr.insertCell(4);
-        
+
         let editButton = document.createElement('button');
         editButton.innerText = 'Edit';
         editButton.onclick = () => displayEditForm(item.id);
         td5.appendChild(editButton);
-        
+
         td5.appendChild(document.createTextNode(' '));
 
         let deleteButton = document.createElement('button');
@@ -208,3 +259,16 @@ function _displayItems(data) {
 
     instruments = data;
 }
+// פונקציה להצגה והסתרה של חלון ההודעות
+function toggleNotifications() {
+    const panel = document.getElementById('notifications-panel');
+    
+    // בודקים מה המצב הנוכחי של החלון והופכים אותו
+    if (panel.style.display === 'none') {
+        panel.style.display = 'block';
+    } else {
+        panel.style.display = 'none';
+    }
+}
+// קריאה לפונקציה שמתחילה את הכל כשהקובץ נטען
+initPage();

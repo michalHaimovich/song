@@ -1,16 +1,8 @@
-using SongNameSpace.Models;
+using SongApi.Models;
 
-namespace WEBAPI.interfaces;
- public interface Isong  
+namespace SongApi.interfaces;
+ public interface Isong  : Icrud<Song>
  {
-      List<Song> Get();
 
-      Song Get(int id);
-
-      void Create(Song song);
-
-       int update(int id, Song song);
-
-       bool delete(int id);
 
  }

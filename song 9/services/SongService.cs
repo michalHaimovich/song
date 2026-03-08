@@ -3,13 +3,14 @@ using System.Linq;
 using System.IO;
 using System;
 using System.Net;
-using SongNameSpace.Models;
-using WEBAPI.interfaces;
+using SongApi.Models;
+using SongApi.interfaces;
 using System.Text.Json;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.SignalR; // חסר לך ה-using הזה
+using SongApi.Hubs; // כדי להכיר את ActivityHub
 
-namespace SongHomeWork.service;
-
+namespace SongApi.Services;
 
 public class SongService : Isong
 {
@@ -17,10 +18,13 @@ public class SongService : Isong
 
     ISongReposetory songRepository;
 
-    public SongService(ISongReposetory songRepository, IActiveUser activeUser)
+    IHubContext<ActivityHub> hubContext;
+
+    public SongService(ISongReposetory songRepository, IActiveUser activeUser, IHubContext<ActivityHub> hubContext)
     {
         this.songRepository = songRepository;
         this.activeUser = activeUser;
+        this.hubContext = hubContext;
     }
 
     public List<Song> Get()
@@ -34,11 +38,7 @@ public class SongService : Isong
         var userSongs = songRepository.Get().Where(s => s.userId == userId).ToList();
         return userSongs;
     }
-
-
-
-
-    public Song Get(int id)
+    public Song? Get(int id)
     {
         var song = songRepository.Get(id);
         if (song != null && song.userId != activeUser.ActiveUser.Id && activeUser.ActiveUser.Role != "admin")
@@ -47,8 +47,6 @@ public class SongService : Isong
         }
         return song;
     }
-
-
     public void Create(Song song)
     {
         if (activeUser.ActiveUser.Role != "admin" && song.userId != activeUser.ActiveUser.Id)
@@ -56,18 +54,18 @@ public class SongService : Isong
             throw new UnauthorizedAccessException("You are not allowed to create a song for another user.");
         }
         songRepository.Create(song);
+        BroadcastActivity("created", song);
     }
-
-    public int update(int id, Song song)
+    public int Update(int id, Song song)
     {
         if (activeUser.ActiveUser.Role != "admin" && song.userId != activeUser.ActiveUser.Id)
         {
             throw new UnauthorizedAccessException("You are not allowed to update a song for another user.");
         }
-        return songRepository.update(id, song);
+        BroadcastActivity("updated", song);
+        return songRepository.Update(id, song);
     }
-
-    public bool delete(int id)
+    public bool Delete(int id)
     {
         var song = songRepository.Get(id);
         if (song == null)
@@ -76,9 +74,60 @@ public class SongService : Isong
         {
             return false;
         }
-        return songRepository.delete(id);
+        BroadcastActivity("deleted", song);
+        return songRepository.Delete(id);
     }
 
+    // הפונקציה הפרטית החדשה שלנו שמנהלת את חוקי השידור
+  private void BroadcastActivity(string actionName, Song song)
+{
+    var performerId = activeUser.ActiveUser.Id;
+    var performerName = activeUser.ActiveUser.name;
+    var ownerId = song.userId;
+    var songName = song.name;
+
+    // 1. הודעה לבעל השיר (למי שהשיר שייך לו)
+    string personalMessage;
+    if (performerId == ownerId)
+    {
+        personalMessage = $"You successfully {actionName} your song '{songName}'.";
+    }
+    else
+    {
+        personalMessage = $"Admin '{performerName}' {actionName} your song '{songName}'.";
+    }
+    
+    // שידור לבעל השיר
+    hubContext.Clients.User(ownerId.ToString())
+        .SendAsync("ReceivePersonalActivity", personalMessage, song);
+
+
+    // 2. החדש: הודעה למנהל שמבצע את הפעולה (אם הוא משנה שיר של מישהו אחר)
+    if (performerId != ownerId)
+    {
+        string performerMessage = $"You successfully {actionName} user {ownerId}'s song '{songName}'.";
+        
+        // שידור חזרה למנהל שלחץ על הכפתור
+        hubContext.Clients.User(performerId.ToString())
+            .SendAsync("ReceivePersonalActivity", performerMessage, song);
+    }
+
+
+    // 3. הודעה לשאר המנהלים במערכת (Admins)
+    string adminMessage;
+    if (performerId == ownerId)
+    {
+        adminMessage = $"User '{performerName}' {actionName} their own song '{songName}'.";
+    }
+    else
+    {
+        adminMessage = $"Admin '{performerName}' {actionName} user {ownerId}'s song '{songName}'.";
+    }
+    
+    // שידור לקבוצת המנהלים (נשלח את ה-performerId כדי שהמבצע יסנן אותה ב-JS)
+    hubContext.Clients.Group("Admins")
+        .SendAsync("ReceiveGlobalActivity", adminMessage, song, performerId);
+}
 }
 public static class SongServiceExtention
 {

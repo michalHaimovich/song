@@ -2,14 +2,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using System;
-using UserNameSpace.Models;
-using MyIuser.interfaces;
+using SongApi.Models;
+using SongApi.interfaces;
 using System.Text.Json;
 using Microsoft.AspNetCore.Hosting;
-using WEBAPI.interfaces;
 
 
-namespace MyUserSe.Service;
+namespace SongApi.Services;
 
       public class UserService : Iuser{
         
@@ -26,7 +25,7 @@ namespace MyUserSe.Service;
                 new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true
-                });
+                }) ?? new List<User>();
             }
         }
 
@@ -58,7 +57,7 @@ namespace MyUserSe.Service;
             saveToFile();
         }
 
-        public  int update(int id, User user){
+        public  int Update(int id, User user){
             if(id!= user.Id)
                 return 0;
             var index=ls.FindIndex(p=>p.Id==id);
@@ -70,7 +69,7 @@ namespace MyUserSe.Service;
             return 2;
         }
 
-        public  bool delete(int id){
+        public  bool Delete(int id){
              var index=ls.FindIndex(p=>p.Id==id);
              if(index==-1)
                 return false;

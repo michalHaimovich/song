@@ -1,11 +1,9 @@
-using WEBAPI.interfaces;
-using SongHomeWork.service;
+using SongApi.interfaces;
+using SongApi.Services;
 using MyMiddleware;
-using MyIuser.interfaces;
-using MyUserSe.Service;
 using Token.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using SongHomeWork.Services;
+using SongApi.Hubs;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +18,7 @@ builder.Services.AddControllers();
 builder.Services.AddActiveUser();
 builder.Services.AddHttpContextAccessor();
 builder.Services.addSongRepository();
+builder.Services.AddSignalR();
 
 // Add JWT Authentication
 builder.Services.AddAuthentication(options =>
@@ -30,6 +29,24 @@ builder.Services.AddAuthentication(options =>
 .AddJwtBearer(options =>
 {
     options.TokenValidationParameters = TokenService.GetTokenValidationParameters();
+
+    // --- התוספת הקריטית עבור SignalR ---
+    options.Events = new JwtBearerEvents
+    {
+        OnMessageReceived = context =>
+        {
+            var accessToken = context.Request.Query["access_token"];
+
+            // אם הבקשה מגיעה ל-Hub שלנו ויש לה טוקן ב-URL
+            var path = context.HttpContext.Request.Path;
+            if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/activityHub"))
+            {
+                // תגיד ל-.NET להשתמש בטוקן הזה עבור ההתחברות
+                context.Token = accessToken;
+            }
+            return Task.CompletedTask;
+        }
+    };
 });
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -57,7 +74,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.UseMyLogMiddleware();
+
 
 app.UseDefaultFiles();
 
@@ -69,6 +86,10 @@ app.UseAuthentication();
 //
 app.UseAuthorization();
 
+app.UseMyLogMiddleware();
+
 app.MapControllers();
+
+app.MapHub<ActivityHub>("/activityHub");
 
 app.Run();

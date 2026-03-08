@@ -1,16 +1,7 @@
-using UserNameSpace.Models;
+using SongApi.Models;
 
-namespace MyIuser.interfaces;
- public interface Iuser
+namespace SongApi.interfaces;
+ public interface Iuser : Icrud<User>
  {
-      List<User> Get();
-
-      User Get(int id);
-
-      void Create(User user);
-
-       int update(int id, User user);
-
-       bool delete(int id);
 
  }

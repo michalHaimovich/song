@@ -1,16 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using SongNameSpace.Models;
-using SongHomeWork.service;
-using WEBAPI.interfaces;
+using SongApi.Models;
+using SongApi.Services;
+using SongApi.interfaces;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
-using UserNameSpace.Models;
 using Token.Services;
-using MyIuser.interfaces;
 
-namespace SongHomeWork.Controllers;
+namespace SongApi.Controllers;
 
 [Authorize]
 [ApiController]
@@ -44,7 +42,7 @@ public class LogginController : ControllerBase
                     claims = new List<Claim>
                      {
                          new Claim("username", u.name),
-                         new Claim("userID", u.Id.ToString()),
+                         new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                          new Claim(ClaimTypes.Role, "admin")
                     };
                 }
@@ -53,9 +51,9 @@ public class LogginController : ControllerBase
                     claims = new List<Claim>
                     {
                          new Claim("username", user.name),
-                         new Claim("userID", user.Id.ToString()),
+                         new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                      new Claim(ClaimTypes.Role, "user")
-                    };   
+                    };
                 }
 
                 var token = TokenService.GetToken(claims);

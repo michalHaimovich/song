@@ -1,4 +1,4 @@
-namespace UserNameSpace.Models
+namespace SongApi.Models
 {
 public class User{
 

@@ -1,23 +1,42 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Song</title>
     <link rel="stylesheet" href="css/site.css" />
 </head>
+
 <body>
     <script>
-        const currentToken = localStorage.getItem('token');
+        const currentToken = sessionStorage.getItem('token');
         if (!currentToken) {
             window.location.href = 'i.html';
         }
     </script>
-    
+
     <h2 id="user-greeting"></h2>
-    
+
     <h1>My Songs</h1>
     <a href="./User.html">← Back to Users</a>
     <hr>
+
+    <div id="notifications-wrapper" style="margin-bottom: 20px; max-width: 500px;">
+
+        <button onclick="toggleNotifications()"
+            style="margin-bottom: 10px; cursor: pointer; padding: 5px 10px; border-radius: 5px; border: 1px solid #ccc; background-color: #e9ecef;">
+            הצג/הסתר היסטוריית פעולות 🔔
+        </button>
+
+        <div id="notifications-panel"
+            style="border: 1px solid #ccc; padding: 15px; background-color: #f8f9fa; border-radius: 8px; display: block;">
+            <h3 style="margin-top: 0;">Recent Activity</h3>
+
+            <ol id="notifications-list" style="padding-left: 25px; margin: 0; max-height: 200px; overflow-y: auto;">
+                <li style="color: #666; font-style: italic; list-style-type: none;">No recent activity...</li>
+            </ol>
+        </div>
+    </div>
 
     <h3>Add New Song</h3>
     <form id="add-form">
@@ -55,10 +74,11 @@
     </table>
     <hr>
     <a href="./User.html">← Back to Users</a>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
     <script src="js/SongSite.js" asp-append-version="true"></script>
     <script type="text/javascript">
         initPage();
     </script>
 </body>
+
 </html>

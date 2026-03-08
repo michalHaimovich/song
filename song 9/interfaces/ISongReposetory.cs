@@ -1,4 +1,5 @@
-using WEBAPI.interfaces;
+
+namespace SongApi.interfaces;
 
 public interface ISongReposetory : Isong
 {

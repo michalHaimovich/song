@@ -1,6 +1,6 @@
 const uri = '/User';
 let instruments = [];
-const token = localStorage.getItem('token');
+const token = sessionStorage.getItem('token');
 const payloadBase64 = token.split('.')[1];
 const decodedToken = JSON.parse(atob(payloadBase64));
 const userRole = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];

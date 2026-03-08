@@ -21,12 +21,13 @@ function chack() {
         else
             return response.json()
     }).then(data => {
-        if(data){  
-            localStorage.setItem('token', data);
+        if (data) {
+            sessionStorage.setItem('token', data);
             window.location.href = 'index.html';
         }
-        })
+    })
         .catch(error => {
-
-     })
+            console.error('Error:', error);
+            alert("An error occurred while trying to log in. Please try again later.");
+        })
 }

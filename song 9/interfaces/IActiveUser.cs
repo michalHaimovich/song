@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using UserNameSpace.Models;
+using SongApi.Models;
 
-namespace WEBAPI.interfaces;
+namespace SongApi.interfaces;
 
 public interface IActiveUser
 {

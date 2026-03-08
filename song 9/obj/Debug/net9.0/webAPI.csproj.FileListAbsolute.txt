@@ -139,8 +139,9 @@ C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\refint\webAPI.dll
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\webAPI.pdb
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\webAPI.genruntimeconfig.cache
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\ref\webAPI.dll
-C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\hyhis1mbcp-{0}-qsfv7dxxah-qsfv7dxxah.gz
-C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\l5278gjycv-{0}-5opeknrbgq-5opeknrbgq.gz
-C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\shjnofoy7i-{0}-5b7wig3u5i-5b7wig3u5i.gz
-C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\mucub6hffx-{0}-1uh4hl0n6h-1uh4hl0n6h.gz
-C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\zzzijpd2c7-{0}-yc35plvflk-yc35plvflk.gz
+C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\zzzijpd2c7-{0}-c9fy2b41kh-c9fy2b41kh.gz
+C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\shjnofoy7i-{0}-wuif0p1zth-wuif0p1zth.gz
+C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\hyhis1mbcp-{0}-zphm08cgvu-zphm08cgvu.gz
+C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\l5278gjycv-{0}-eszue481ze-eszue481ze.gz
+C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\mucub6hffx-{0}-uppsol59hx-uppsol59hx.gz
+C:\Users\micha\webAPI\song\song 9\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
