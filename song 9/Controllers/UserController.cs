@@ -44,14 +44,10 @@ public class UserController : ControllerBase
         if (int.TryParse(tokenUserIdStr, out int userId))
         {
             var singleUser = service.Get(userId);
-
             if (singleUser == null)
-            {
-                return NotFound(); // המשתמש שרשום בטוקן לא נמצא במסד הנתונים
-            }
+               return NotFound(); // המשתמש שרשום בטוקן לא נמצא במסד הנתונים
             return new List<User> { singleUser };
         }
-
         // במקרה שהטוקן לא מכיל ID תקין
         return BadRequest();
     }

@@ -127,7 +127,6 @@ C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\rjsmrazor.dswa.cache.json
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\scopedcss\bundle\webAPI.styles.css
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\zbm078qita-{0}-zoxlk5se5i-zoxlk5se5i.gz
-C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\w8xivvyqop-{0}-5uv300noye-5uv300noye.gz
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\staticwebassets.build.json.cache
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\staticwebassets.development.json
@@ -139,9 +138,17 @@ C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\refint\webAPI.dll
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\webAPI.pdb
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\webAPI.genruntimeconfig.cache
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\ref\webAPI.dll
-C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\zzzijpd2c7-{0}-c9fy2b41kh-c9fy2b41kh.gz
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\shjnofoy7i-{0}-wuif0p1zth-wuif0p1zth.gz
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\hyhis1mbcp-{0}-zphm08cgvu-zphm08cgvu.gz
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\l5278gjycv-{0}-eszue481ze-eszue481ze.gz
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\mucub6hffx-{0}-uppsol59hx-uppsol59hx.gz
 C:\Users\micha\webAPI\song\song 9\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\micha\webAPI\song\song 9\bin\Debug\net9.0\RabbitMQ.Client.dll
+C:\Users\micha\webAPI\song\song 9\bin\Debug\net9.0\Google.Apis.dll
+C:\Users\micha\webAPI\song\song 9\bin\Debug\net9.0\Google.Apis.Auth.dll
+C:\Users\micha\webAPI\song\song 9\bin\Debug\net9.0\Google.Apis.Core.dll
+C:\Users\micha\webAPI\song\song 9\bin\Debug\net9.0\System.CodeDom.dll
+C:\Users\micha\webAPI\song\song 9\bin\Debug\net9.0\System.Management.dll
+C:\Users\micha\webAPI\song\song 9\bin\Debug\net9.0\runtimes\win\lib\net7.0\System.Management.dll
+C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\w8xivvyqop-{0}-gjjoucpr15-gjjoucpr15.gz
+C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\zzzijpd2c7-{0}-fz8ub541zb-fz8ub541zb.gz

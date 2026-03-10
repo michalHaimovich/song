@@ -1,12 +1,11 @@
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using SongApi.Models;
-using SongApi.Services;
 using SongApi.interfaces;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Token.Services;
+using Google.Apis.Auth;
+using System.Threading.Tasks;
 
 namespace SongApi.Controllers;
 
@@ -63,5 +62,62 @@ public class LogginController : ControllerBase
         }
         return Unauthorized();
     }
+// מחלקת עזר קטנה לקבלת האסימון מ-JS
+    public class GoogleLoginRequest
+    {
+        public string? Credential { get; set; }
+    }
+    [HttpPost]
+    [Route("[action]")]
+    [AllowAnonymous]
+    public async Task<ActionResult<String>> GoogleLogin([FromBody] GoogleLoginRequest request)
+    {
+        if (string.IsNullOrEmpty(request.Credential))
+        {
+            return BadRequest("Token is missing");
+        }
 
+        try
+        {
+            var payload = await GoogleJsonWebSignature.ValidateAsync(request.Credential);
+            
+            string googleEmail = payload.Email;
+            string googleName = payload.Name;
+
+            List<User> users = service.Get();
+            User existingUser = users.FirstOrDefault(u => u.name == googleEmail || u.name == googleName);
+
+            string role = "user"; 
+            string finalName = googleName;
+            string finalId; // יכיל את ה-ID המספרי התקין
+
+            if (existingUser != null)
+            {
+                // המשתמש קיים אצלך: ניקח את ה-ID המספרי הרגיל שלו מהמסד נתונים
+                role = existingUser.Role; 
+                finalName = existingUser.name;
+                finalId = existingUser.Id.ToString();
+            }
+            else 
+            {
+                // משתמש חדש לגמרי: אי אפשר לתת לו את ה-ID של גוגל כי הוא יקריס את ActiveUserService.
+                // ניתן לו בינתיים 0. בהמשך תוכלי להוסיף אותו לרשימה ולקבל ID חדש.
+                finalId = "0"; 
+            }
+
+            var claims = new List<Claim>
+            {
+                new Claim("username", finalName),
+                new Claim(ClaimTypes.NameIdentifier, finalId), // עכשיו זה מספר תקין!
+                new Claim(ClaimTypes.Role, role) 
+            };
+
+            var token = TokenService.GetToken(claims);
+            return new OkObjectResult(TokenService.WriteToken(token));
+        }
+        catch (InvalidJwtException)
+        {
+            return Unauthorized("Invalid Google token.");
+        }
+    }
 }

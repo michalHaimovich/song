@@ -19,6 +19,8 @@ builder.Services.AddActiveUser();
 builder.Services.AddHttpContextAccessor();
 builder.Services.addSongRepository();
 builder.Services.AddSignalR();
+builder.Services.AddSingleton<ILogQueueService, LogQueueService>();
+builder.Services.AddHostedService<LogWorker>();
 
 // Add JWT Authentication
 builder.Services.AddAuthentication(options =>
