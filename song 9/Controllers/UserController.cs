@@ -25,28 +25,32 @@ public class UserController : ControllerBase
     }
 
 
-
     [HttpGet]
-    [Authorize(Roles = "admin,user")]
-    public ActionResult<IEnumerable<User>> Get()
+    [Authorize(Roles = "admin")]
+    public ActionResult<IEnumerable<User>> GetAll()
     {
-        // 1. שליפת התפקיד וה-ID מתוך הטוקן
+        return service.Get();
+    }
+
+    [HttpGet("me")]
+    [Authorize(Roles = "admin,user")]
+    public ActionResult<User> GetCurrentUser(int me)
+    {
+        // שליפת התפקיד וה-ID מתוך הטוקן
         var userRole = this.User.FindFirst(ClaimTypes.Role)?.Value;
         var tokenUserIdStr = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-        // 2. בדיקה: אם זה אדמין, נחזיר את כל המשתמשים
-        if (userRole == "admin")
-        {
-            return service.Get(); // מחזיר את כל הרשימה
-        }
-
-        // 3. אם זה משתמש רגיל, נחזיר רק אותו
+        // אם זה משתמש רגיל או admin, נחזיר את עצמו בלבד
         if (int.TryParse(tokenUserIdStr, out int userId))
         {
+            if (userRole != "admin" && userId != me)
+            {
+                return Forbid(); // המשתמש הרגיל מנסה לגשת למידע של משתמש אחר
+            }
             var singleUser = service.Get(userId);
             if (singleUser == null)
                return NotFound(); // המשתמש שרשום בטוקן לא נמצא במסד הנתונים
-            return new List<User> { singleUser };
+            return singleUser;
         }
         // במקרה שהטוקן לא מכיל ID תקין
         return BadRequest();

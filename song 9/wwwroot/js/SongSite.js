@@ -98,6 +98,14 @@ function initPage() {
         ? `Hello, ${username} (Admin)`
         : `Hello, ${username}`;
 
+    // אם זה admin, הצג את הקישור לניהול יוזרים
+    if (isAdmin) {
+        const adminLink = document.getElementById('admin-link');
+        if (adminLink) {
+            adminLink.style.display = 'inline';
+        }
+    }
+
     if (isAdmin) {
         document.getElementById('add-userId').style.display = 'inline-block';
         document.getElementById('edit-userId').style.display = 'inline-block';
@@ -270,5 +278,50 @@ function toggleNotifications() {
         panel.style.display = 'none';
     }
 }
+
+// פונקציות להצגת פרטים אישיים
+function showMyProfile() {
+    if (!token) {
+        alert('No token found');
+        return;
+    }
+
+    fetch('/User/me', {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(user => {
+        document.getElementById('profile-id').innerText = user.id || user.Id || 'N/A';
+        document.getElementById('profile-name').innerText = user.name || 'N/A';
+        document.getElementById('profile-role').innerText = user.role || user.Role || 'N/A';
+        
+        const modal = document.getElementById('profileModal');
+        if (modal) {
+            modal.style.display = 'flex';
+        }
+    })
+    .catch(error => {
+        console.error('Unable to fetch user profile:', error);
+        alert('Failed to load profile details');
+    });
+}
+
+function closeProfileModal() {
+    const modal = document.getElementById('profileModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
 // קריאה לפונקציה שמתחילה את הכל כשהקובץ נטען
 initPage();

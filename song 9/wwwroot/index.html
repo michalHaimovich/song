@@ -18,7 +18,16 @@
     <h2 id="user-greeting"></h2>
 
     <h1>My Songs</h1>
-    <a href="./User.html">← Back to Users</a>
+    <div style="margin-bottom: 15px;">
+        <button onclick="showMyProfile()" style="cursor: pointer; padding: 8px 15px; margin-right: 10px; border-radius: 5px; border: 1px solid #ccc; background-color: #d3d3d3;">
+            👤 My Profile
+        </button>
+        <a id="admin-link" href="./User.html" style="display:none; text-decoration: none;">
+            <button style="cursor: pointer; padding: 8px 15px; border-radius: 5px; border: 1px solid #ccc; background-color: #e9ecef;">
+                👨‍💼 Users Management
+            </button>
+        </a>
+    </div>
     <hr>
 
     <div id="notifications-wrapper" style="margin-bottom: 20px; max-width: 500px;">
@@ -56,6 +65,20 @@
             <input type="submit" value="Save">
             <a href="#" onclick="closeInput(); return false;" aria-label="Close">&#10006;</a>
         </form>
+    </div>
+
+    <div id="profileModal" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+        <div style="background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.3); max-width: 400px; width: 90%;">
+            <h3 style="margin-top: 0;">My Profile</h3>
+            <div id="profile-content" style="margin-bottom: 20px; line-height: 1.8;">
+                <p><strong>ID:</strong> <span id="profile-id"></span></p>
+                <p><strong>Name:</strong> <span id="profile-name"></span></p>
+                <p><strong>Role:</strong> <span id="profile-role"></span></p>
+            </div>
+            <button onclick="closeProfileModal()" style="cursor: pointer; padding: 8px 15px; border-radius: 5px; border: 1px solid #ccc; background-color: #e9ecef; width: 100%;">
+                Close
+            </button>
+        </div>
     </div>
 
     <p id="counter"></p>

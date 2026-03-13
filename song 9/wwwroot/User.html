@@ -13,6 +13,18 @@
         }
     </script>
     
+    <h2 id="user-greeting"></h2>
+    <div style="margin-bottom: 15px;">
+        <button onclick="showMyProfile()" style="cursor: pointer; padding: 8px 15px; margin-right: 10px; border-radius: 5px; border: 1px solid #ccc; background-color: #d3d3d3;">
+            👤 My Profile
+        </button>
+        <a href="index.html" style="text-decoration: none;">
+            <button style="cursor: pointer; padding: 8px 15px; border-radius: 5px; border: 1px solid #ccc; background-color: #e9ecef;">
+                🎵 Back to Songs
+            </button>
+        </a>
+    </div>
+    <hr>
     <form action="javascript:void(0);" method="POST" onsubmit="addItem()" style="display:none;" id="addForm">
         <input type="text" id="add-name" placeholder="User Name" required>
         <input type="text" id="add-password" placeholder="Password" required>
@@ -47,6 +59,20 @@
 
     <br>
     <a href="index.html">to songs</a>
+    
+    <div id="profileModal" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+        <div style="background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.3); max-width: 400px; width: 90%;">
+            <h3 style="margin-top: 0;">My Profile</h3>
+            <div id="profile-content" style="margin-bottom: 20px; line-height: 1.8;">
+                <p><strong>ID:</strong> <span id="profile-id"></span></p>
+                <p><strong>Name:</strong> <span id="profile-name"></span></p>
+                <p><strong>Role:</strong> <span id="profile-role"></span></p>
+            </div>
+            <button onclick="closeProfileModal()" style="cursor: pointer; padding: 8px 15px; border-radius: 5px; border: 1px solid #ccc; background-color: #e9ecef; width: 100%;">
+                Close
+            </button>
+        </div>
+    </div>
     
     <script src="js/UserSite.js" asp-append-version="true"></script>
     <script type="text/javascript">
