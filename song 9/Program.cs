@@ -52,8 +52,36 @@ builder.Services.AddAuthentication(options =>
     };
 });
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
-builder.Services.AddSwaggerGen();
+//builder.Services.AddOpenApi();
+builder.Services.AddSwaggerGen(c =>
+{
+    // 1. הגדרת כפתור ה-Authorize והחלון הקופץ
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "הכנס את הטוקן שקיבלת מהלוגין לכאן.\n\nלא צריך לכתוב את המילה Bearer, פשוט להדביק את הטוקן עצמו.",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT"
+    });
+
+    // 2. הגדרה שכל פעולה ב-Swagger תדרוש את הטוקן הזה
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
+});
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole(); 
 builder.Logging.SetMinimumLevel(LogLevel.Debug);
@@ -66,14 +94,14 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+   // app.MapOpenApi();
     //
      app.UseDeveloperExceptionPage();
      app.UseSwagger();
     //
      app.UseSwaggerUI(options =>
     {
-        options.SwaggerEndpoint("/openapi/v1.json", "v1");
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
     });
 }
 

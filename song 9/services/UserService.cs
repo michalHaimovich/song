@@ -13,11 +13,13 @@ namespace SongApi.Services;
       public class UserService : Iuser{
         
         private List<User> ls {get; }
+        private ISongReposetory songService;
         private string filePath;
 
-        public UserService(IWebHostEnvironment webHost ){
+        public UserService(IWebHostEnvironment webHost, ISongReposetory songService){
              this.filePath=Path.Combine(webHost.ContentRootPath,"data","user.json");
-  
+             this.songService = songService;
+
               using (var jsonFile = File.OpenText(filePath))
             {
                 var content = jsonFile.ReadToEnd();
@@ -73,6 +75,11 @@ namespace SongApi.Services;
              if(index==-1)
                 return false;
              else{ 
+                var songsToDelete = songService.Get().Where(s => s.userId == id).ToList();
+                foreach (var song in songsToDelete)
+                {
+                    songService.Delete(song.Id);
+                }
                 ls.RemoveAt(index);
                 saveToFile();
                 return true;
