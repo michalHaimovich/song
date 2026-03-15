@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Users Management</title>
-    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/site.css?v=1">
 </head>
-<body>
+<body class="modern-body">
     <script>
         if (sessionStorage.getItem('token') == null) {
             window.location.href = 'i.html';
         }
     </script>
     
-    <h2 id="user-greeting"></h2>
-    <div style="margin-bottom: 15px;">
+    <h2 id="user-greeting" class="modern-header"></h2>
+    <div class="button-group" style="margin-bottom: 15px;">
         <button onclick="showMyProfile()" style="cursor: pointer; padding: 8px 15px; margin-right: 10px; border-radius: 5px; border: 1px solid #ccc; background-color: #d3d3d3;">
             👤 My Profile
         </button>
@@ -25,14 +25,15 @@
         </a>
     </div>
     <hr>
-    <form action="javascript:void(0);" method="POST" onsubmit="addItem()" style="display:none;" id="addForm">
+    <h3>Add User</h3>
+    <form action="javascript:void(0);" method="POST" onsubmit="addItem()" style="display:none;" id="addForm" class="modern-form">
         <input type="text" id="add-name" placeholder="User Name" required>
         <input type="text" id="add-password" placeholder="Password" required>
         <input type="text" id="add-role" placeholder="Role (admin/user)" style="display:none;">
         <input type="submit" value="Add">
     </form>
 
-    <div id="editForm" style="display: none;">
+    <div id="editForm" style="display: none;" class="modern-form">
         <h3>Edit User</h3>
         <form action="javascript:void(0);" onsubmit="updateItem()">
             <div id="edit-id-display" style="font-weight: bold; margin-bottom: 10px;"></div>
@@ -47,7 +48,7 @@
         </form>
     </div>
 
-    <table>
+    <table class="modern-table">
         <tr>
             <th>ID</th> <th>Name</th> 
             <th style="display:none;" id="role-header">Role</th> <th>Password</th> 
@@ -57,20 +58,24 @@
         <tbody id="musics"></tbody>
     </table>
 
-    <br>
-    <a href="index.html">to songs</a>
-    
-    <div id="profileModal" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
-        <div style="background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.3); max-width: 400px; width: 90%;">
+    <br>    
+    <div id="profileModal" class="modern-modal" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+        <div class="modal-content" style="background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.3); max-width: 400px; width: 90%;">
             <h3 style="margin-top: 0;">My Profile</h3>
             <div id="profile-content" style="margin-bottom: 20px; line-height: 1.8;">
                 <p><strong>ID:</strong> <span id="profile-id"></span></p>
                 <p><strong>Name:</strong> <span id="profile-name"></span></p>
                 <p><strong>Role:</strong> <span id="profile-role"></span></p>
             </div>
-            <button onclick="closeProfileModal()" style="cursor: pointer; padding: 8px 15px; border-radius: 5px; border: 1px solid #ccc; background-color: #e9ecef; width: 100%;">
-                Close
-            </button>
+            <div id="profile-edit" style="display:none; margin-bottom: 20px;">
+                <h4>Edit Profile</h4>
+                <input type="text" id="edit-profile-name" placeholder="Name" class="modern-input">
+                <input type="password" id="edit-profile-password" placeholder="New Password (leave empty to keep current)" class="modern-input">
+                <button onclick="saveProfile()" class="modern-button">Save</button>
+                <button onclick="cancelEditProfile()" class="modern-button">Cancel</button>
+            </div>
+            <button onclick="closeProfileModal()" class="modern-button">Close</button>
+            <button onclick="editProfile()" class="modern-button">Edit</button>
         </div>
     </div>
     

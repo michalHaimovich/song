@@ -323,5 +323,57 @@ function closeProfileModal() {
     }
 }
 
+function editProfile() {
+    const name = document.getElementById('profile-name').innerText;
+    document.getElementById('edit-profile-name').value = name;
+    document.getElementById('profile-content').style.display = 'none';
+    document.getElementById('profile-edit').style.display = 'block';
+}
+
+function cancelEditProfile() {
+    document.getElementById('profile-content').style.display = 'block';
+    document.getElementById('profile-edit').style.display = 'none';
+}
+
+function saveProfile() {
+    const newName = document.getElementById('edit-profile-name').value.trim();
+    const newPassword = document.getElementById('edit-profile-password').value;
+    const id = document.getElementById('profile-id').innerText;
+
+    if (!newName) {
+        alert('Name is required');
+        return;
+    }
+
+    const updateData = { name: newName, Id: parseInt(id) };
+    if (newPassword) {
+        updateData.Password = newPassword;
+    }
+
+    fetch(`/User/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(updateData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Update failed');
+        }
+    })
+    .then(() => {
+        document.getElementById('profile-name').innerText = newName;
+        cancelEditProfile();
+        alert('Profile updated successfully');
+    })
+    .catch(error => {
+        console.error(error);
+        alert('Error updating profile');
+    });
+}
+
 // קריאה לפונקציה שמתחילה את הכל כשהקובץ נטען
 initPage();

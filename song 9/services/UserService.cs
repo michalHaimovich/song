@@ -63,8 +63,7 @@ namespace SongApi.Services;
             var index=ls.FindIndex(p=>p.Id==id);
             if(index==-1)
                 return 1;
-            ls[index].name = user.name;
-            ls[index].Role = user.Role;
+            ls[index]=user;
             saveToFile();
             return 2;
         }

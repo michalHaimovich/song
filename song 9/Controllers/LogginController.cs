@@ -62,7 +62,6 @@ public class LogginController : ControllerBase
         }
         return Unauthorized();
     }
-// מחלקת עזר קטנה לקבלת האסימון מ-JS
     public class GoogleLoginRequest
     {
         public string? Credential { get; set; }
@@ -82,7 +81,7 @@ public class LogginController : ControllerBase
             var payload = await GoogleJsonWebSignature.ValidateAsync(request.Credential);
             
             string googleEmail = payload.Email;
-            string googleName = payload.Name;
+            string googleName = payload.Name ?? (payload.GivenName + " " + payload.FamilyName).Trim();
 
             List<User> users = service.Get();
             User existingUser = users.FirstOrDefault(u => u.name == googleEmail || u.name == googleName);
@@ -93,16 +92,23 @@ public class LogginController : ControllerBase
 
             if (existingUser != null)
             {
-                // המשתמש קיים אצלך: ניקח את ה-ID המספרי הרגיל שלו מהמסד נתונים
                 role = existingUser.Role; 
                 finalName = existingUser.name;
                 finalId = existingUser.Id.ToString();
             }
             else 
             {
-                // משתמש חדש לגמרי: אי אפשר לתת לו את ה-ID של גוגל כי הוא יקריס את ActiveUserService.
-                // ניתן לו בינתיים 0. בהמשך תוכלי להוסיף אותו לרשימה ולקבל ID חדש.
-                finalId = "0"; 
+                // משתמש חדש: נוסיף אותו למסד הנתונים עם סיסמה זמנית
+                var newUser = new User
+                {
+                    Id = 0, // ייקבע על ידי המאגר
+                    name = googleName,
+                    Password = "google" + Guid.NewGuid().ToString().Substring(0, 8), // סיסמה אקראית
+                    Role = "user"
+                };
+                service.Create(newUser);
+                finalId = newUser.Id.ToString();
+                finalName = newUser.name;
             }
 
             var claims = new List<Claim>

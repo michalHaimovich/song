@@ -34,7 +34,7 @@ public class UserController : ControllerBase
 
     [HttpGet("me")]
     [Authorize(Roles = "admin,user")]
-    public ActionResult<User> GetCurrentUser(int me)
+    public ActionResult<User> GetCurrentUser()
     {
         // שליפת התפקיד וה-ID מתוך הטוקן
         var userRole = this.User.FindFirst(ClaimTypes.Role)?.Value;
@@ -43,10 +43,6 @@ public class UserController : ControllerBase
         // אם זה משתמש רגיל או admin, נחזיר את עצמו בלבד
         if (int.TryParse(tokenUserIdStr, out int userId))
         {
-            if (userRole != "admin" && userId != me)
-            {
-                return Forbid(); // המשתמש הרגיל מנסה לגשת למידע של משתמש אחר
-            }
             var singleUser = service.Get(userId);
             if (singleUser == null)
                return NotFound(); // המשתמש שרשום בטוקן לא נמצא במסד הנתונים

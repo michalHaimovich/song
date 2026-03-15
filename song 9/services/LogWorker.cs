@@ -12,7 +12,6 @@ public class LogWorker : BackgroundService
     private readonly ILogQueueService _logQueue;
     private readonly object _fileLock = new object();
 
-    // השרת מזריק לנו את התור כדי שנוכל לקרוא ממנו
     public LogWorker(ILogQueueService logQueue)
     {
         _logQueue = logQueue;
@@ -20,11 +19,9 @@ public class LogWorker : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        // לולאה שרצה לנצח ומחכה להודעות חדשות בתור
         await foreach (var logMessage in _logQueue.ReadAllLogsAsync(stoppingToken))
         {
             // === זיוף הפעולה הכבדה ===
-            // השרת יחכה 5 שניות מבלי לתקוע את הלקוח (Swagger)
             await Task.Delay(5000, stoppingToken);
 
             // יצירת תיקייה וקובץ לפי תאריך
