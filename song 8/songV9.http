@@ -1,6 +1,0 @@
-@songV9_HostAddress = http://localhost:5166
-
-GET {{songV9_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

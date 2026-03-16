@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\songV9.props" />
-</Project>
