@@ -62,9 +62,6 @@ Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\refint
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\webAPI.pdb
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\webAPI.genruntimeconfig.cache
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\ref\webAPI.dll
-Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\b3hj2x1gnm-cuqvmxb13f.gz
-Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\81e5gvvwwd-zoxlk5se5i.gz
-Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\dcbdl0ednc-c4insr5426.gz
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\data\song.json
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\data\user.json
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
@@ -76,18 +73,8 @@ Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\Micros
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
-Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\fu6vx1qp9q-9lcc5u8338.gz
-Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\2xvua2zodb-5uv300noye.gz
-Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\h1btcv3pzh-p2waf1qxk1.gz
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\Newtonsoft.Json.dll
 Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\System.Net.WebSockets.WebSocketProtocol.dll
-Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\staticwebassets\msbuild.webAPI.Microsoft.AspNetCore.StaticWebAssets.props
-Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\staticwebassets\msbuild.webAPI.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
-Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\staticwebassets\msbuild.build.webAPI.props
-Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\staticwebassets\msbuild.buildMultiTargeting.webAPI.props
-Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\staticwebassets\msbuild.buildTransitive.webAPI.props
-Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\staticwebassets.pack.json
-Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\8p5be895wc-4w2l1zm2f4.gz
 C:\Users\micha\webAPI\song\song 9\bin\Debug\net9.0\webAPI.exe
 C:\Users\micha\webAPI\song\song 9\bin\Debug\net9.0\webAPI.dll
 C:\Users\micha\webAPI\song\song 9\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
@@ -216,3 +203,23 @@ C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\hyhis1mbcp-{0}-d6t
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\l5278gjycv-{0}-lzjpqro920-lzjpqro920.gz
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\shjnofoy7i-{0}-rns46maouv-rns46maouv.gz
 C:\Users\micha\webAPI\song\song 9\obj\Debug\net9.0\compressed\mucub6hffx-{0}-e5ovypu9qp-e5ovypu9qp.gz
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\Google.Apis.dll
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\Google.Apis.Auth.dll
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\Google.Apis.Core.dll
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\RabbitMQ.Client.dll
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\System.CodeDom.dll
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\System.Management.dll
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\bin\Debug\net9.0\runtimes\win\lib\net7.0\System.Management.dll
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\rpswa.dswa.cache.json
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\rjimswa.dswa.cache.json
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\rjsmrazor.dswa.cache.json
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\81e5gvvwwd-3tr9edmewk.gz
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\2xvua2zodb-lkeih5hacf.gz
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\h1btcv3pzh-d6t9dfe770.gz
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\8p5be895wc-fz8ub541zb.gz
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\dcbdl0ednc-lzjpqro920.gz
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\fu6vx1qp9q-rns46maouv.gz
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\compressed\b3hj2x1gnm-e5ovypu9qp.gz
+Z:\יד תשפו\חיימוביץ מיכל\webAPI\song 9\obj\Debug\net9.0\staticwebassets.build.json.cache
