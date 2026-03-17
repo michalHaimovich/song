@@ -16,11 +16,11 @@ public class SongService : Isong
 {
     IActiveUser activeUser;
 
-    ISongReposetory songRepository;
+    IGenericRepository<Song> songRepository;
 
     IHubContext<ActivityHub> hubContext;
 
-    public SongService(ISongReposetory songRepository, IActiveUser activeUser, IHubContext<ActivityHub> hubContext)
+    public SongService(IGenericRepository<Song> songRepository, IActiveUser activeUser, IHubContext<ActivityHub> hubContext)
     {
         this.songRepository = songRepository;
         this.activeUser = activeUser;

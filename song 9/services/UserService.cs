@@ -12,78 +12,72 @@ namespace SongApi.Services;
 
       public class UserService : Iuser{
         
-        private List<User> ls {get; }
-        private ISongReposetory songService;
-        private string filePath;
+        private IGenericRepository<User> userRepo;
+        private IGenericRepository<Song> songService;
+        private IActiveUser activeUser;
 
-        public UserService(IWebHostEnvironment webHost, ISongReposetory songService){
-             this.filePath=Path.Combine(webHost.ContentRootPath,"data","user.json");
+        public UserService(IGenericRepository<User> userRepo, IGenericRepository<Song> songService, IActiveUser activeUser){
+             this.userRepo = userRepo;
              this.songService = songService;
-
-              using (var jsonFile = File.OpenText(filePath))
-            {
-                var content = jsonFile.ReadToEnd();
-                ls = JsonSerializer.Deserialize<List<User>>(content,
-                new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                }) ?? new List<User>();
-            }
-        }
-
-           private void saveToFile()
-        {
-            var text = JsonSerializer.Serialize(ls);
-            File.WriteAllText(filePath, text);
+             this.activeUser = activeUser;
         }  
 
         public  List<User> Get()
         {
-
-            List<User> Users = [..ls];
-            return Users;
+            return userRepo.Get();
         }
-
-
 
         public  User Get(int id)
         {
-            return ls.FirstOrDefault(m=>m.Id==id)!;
+            return userRepo.Get(id);
         }
-
 
         public  void Create(User user)
         {
-            user.Id=ls.Max(m=>m.Id)+1;
-            ls.Add(user);
-            saveToFile();
+            userRepo.Create(user);
         }
 
         public  int Update(int id, User user){
-            if(id!= user.Id)
-                return 0;
-            var index=ls.FindIndex(p=>p.Id==id);
-            if(index==-1)
-                return 1;
-            ls[index]=user;
-            saveToFile();
-            return 2;
+            var existing = userRepo.Get(id);
+            if (existing == null) return 1;
+
+            var userRole = activeUser.ActiveUser.Role;
+            var tokenUserId = activeUser.ActiveUser.Id;
+
+            if (userRole != "admin" && tokenUserId != id)
+            {
+                return 0; // Forbid equivalent
+            }
+
+            // Update only provided fields
+            if (!string.IsNullOrEmpty(user.name)) existing.name = user.name;
+            if (!string.IsNullOrEmpty(user.Password)) existing.Password = user.Password;
+            if (!string.IsNullOrEmpty(user.Role))
+            {
+                if (userRole == "admin")
+                {
+                    existing.Role = user.Role;
+                }
+                else
+                {
+                    existing.Role = "user";
+                }
+            }
+            else if (userRole != "admin")
+            {
+                existing.Role = "user";
+            }
+
+            return userRepo.Update(id, existing);
         }
 
         public  bool Delete(int id){
-             var index=ls.FindIndex(p=>p.Id==id);
-             if(index==-1)
-                return false;
-             else{ 
-                var songsToDelete = songService.Get().Where(s => s.userId == id).ToList();
-                foreach (var song in songsToDelete)
-                {
-                    songService.Delete(song.Id);
-                }
-                ls.RemoveAt(index);
-                saveToFile();
-                return true;
-            }
+             var songsToDelete = songService.Get().Where(s => s.userId == id).ToList();
+             foreach (var song in songsToDelete)
+             {
+                 songService.Delete(song.Id);
+             }
+             return userRepo.Delete(id);
         }
 
      }
@@ -91,7 +85,7 @@ namespace SongApi.Services;
      public static class UserServiceExtention
      {
         public static void addUserService(this IServiceCollection service){
-            service.AddSingleton<Iuser, UserService>();
+            service.AddScoped<Iuser, UserService>();
         }
      }
 

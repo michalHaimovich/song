@@ -1,6 +1,7 @@
 using SongApi.interfaces;
 using Microsoft.OpenApi.Models;
 using SongApi.Services;
+using SongApi.Models;
 using MyMiddleware;
 using Token.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -18,7 +19,8 @@ builder.Services.addUserService();
 builder.Services.AddControllers();
 builder.Services.AddActiveUser();
 builder.Services.AddHttpContextAccessor();
-builder.Services.addSongRepository();
+builder.Services.addGenericRepository<Song>();
+builder.Services.addGenericRepository<User>();
 builder.Services.AddSignalR();
 builder.Services.AddSingleton<ILogQueueService, LogQueueService>();
 builder.Services.AddHostedService<LogWorker>();

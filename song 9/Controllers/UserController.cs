@@ -36,11 +36,8 @@ public class UserController : ControllerBase
     [Authorize(Roles = "admin,user")]
     public ActionResult<User> GetCurrentUser()
     {
-        // שליפת התפקיד וה-ID מתוך הטוקן
-        var userRole = this.User.FindFirst(ClaimTypes.Role)?.Value;
         var tokenUserIdStr = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-        // אם זה משתמש רגיל או admin, נחזיר את עצמו בלבד
         if (int.TryParse(tokenUserIdStr, out int userId))
         {
             var singleUser = service.Get(userId);
@@ -76,20 +73,9 @@ public class UserController : ControllerBase
     [Authorize(Roles = "admin,user")]
     public ActionResult update(int id, User user)
     {
-        var userRole = this.User.FindFirst(ClaimTypes.Role)?.Value;
-        var tokenUserIdStr = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-        if (userRole != "admin" && tokenUserIdStr != id.ToString())
-        {
-            return Forbid();
-        }
-        if (userRole != "admin")
-        {
-            user.Role = "user";
-        }
         int i = service.Update(id, user);
 
-        if (i == 0) return BadRequest();
+        if (i == 0) return Forbid();
         if (i == 1) return NotFound();
 
         return NoContent();

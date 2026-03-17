@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\micha\\webAPI\\song\\song 9\\webAPI.csproj": {}
+    "C:\\Users\\micha\\webAPI\\song\\‏‏תיקיה חדשה\\KsPizza.csproj": {}
   },
   "projects": {
-    "C:\\Users\\micha\\webAPI\\song\\song 9\\webAPI.csproj": {
+    "C:\\Users\\micha\\webAPI\\song\\‏‏תיקיה חדשה\\KsPizza.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\micha\\webAPI\\song\\song 9\\webAPI.csproj",
-        "projectName": "webAPI",
-        "projectPath": "C:\\Users\\micha\\webAPI\\song\\song 9\\webAPI.csproj",
+        "projectUniqueName": "C:\\Users\\micha\\webAPI\\song\\‏‏תיקיה חדשה\\KsPizza.csproj",
+        "projectName": "KsPizza",
+        "projectPath": "C:\\Users\\micha\\webAPI\\song\\‏‏תיקיה חדשה\\KsPizza.csproj",
         "packagesPath": "C:\\Users\\micha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\micha\\webAPI\\song\\song 9\\obj\\",
+        "outputPath": "C:\\Users\\micha\\webAPI\\song\\‏‏תיקיה חדשה\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -22,15 +22,15 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net9.0"
+          "net8.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net9.0": {
-            "targetAlias": "net9.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {}
           }
         },
@@ -47,44 +47,24 @@
         "SdkAnalysisLevel": "10.0.100"
       },
       "frameworks": {
-        "net9.0": {
-          "targetAlias": "net9.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
-            "Google.Apis.Auth": {
-              "target": "Package",
-              "version": "[1.73.0, )"
-            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[9.0.0, )"
-            },
-            "Microsoft.AspNetCore.OpenApi": {
-              "target": "Package",
-              "version": "[9.0.7, )"
+              "version": "[8.0.*, )"
             },
             "Microsoft.AspNetCore.SignalR": {
               "target": "Package",
               "version": "[1.2.9, )"
             },
-            "Microsoft.IdentityModel.Tokens": {
-              "target": "Package",
-              "version": "[8.0.1, )"
-            },
             "RabbitMQ.Client": {
               "target": "Package",
-              "version": "[7.2.1, )"
+              "version": "[7.2.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[5.6.3, )"
-            },
-            "Swashbuckle.AspNetCore.SwaggerUi": {
-              "target": "Package",
-              "version": "[9.0.6, )"
-            },
-            "System.IdentityModel.Tokens.Jwt": {
-              "target": "Package",
-              "version": "[8.0.1, )"
+              "version": "[10.1.0, )"
             }
           },
           "imports": [
@@ -101,19 +81,19 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[9.0.13, 9.0.13]"
+              "version": "[8.0.24, 8.0.24]"
             },
             {
               "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[9.0.13, 9.0.13]"
+              "version": "[8.0.24, 8.0.24]"
             },
             {
               "name": "Microsoft.NETCore.App.Ref",
-              "version": "[9.0.13, 9.0.13]"
+              "version": "[8.0.24, 8.0.24]"
             },
             {
               "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[9.0.13, 9.0.13]"
+              "version": "[8.0.24, 8.0.24]"
             }
           ],
           "frameworkReferences": {
